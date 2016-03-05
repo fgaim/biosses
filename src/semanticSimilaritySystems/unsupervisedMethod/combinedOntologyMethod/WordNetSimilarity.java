@@ -19,8 +19,6 @@ import java.util.List;
  */
 public class WordNetSimilarity implements SimilarityMeasure {
 
-
-    @Override
     public double getSimilarity(String word1, String word2) {
 
         return calculateWordNetPairScore(word1, word2);

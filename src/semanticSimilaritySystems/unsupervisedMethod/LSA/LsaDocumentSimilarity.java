@@ -131,7 +131,6 @@ public class LsaDocumentSimilarity implements SimilarityMeasure {
 
     }
 
-    @Override
     public double getSimilarity(String sentence1, String sentence2) throws IOException {
 
         String filePathForSentence1 = "LSAModel/document1.txt";

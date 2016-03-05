@@ -20,7 +20,7 @@ public class ParagraphVector implements SimilarityMeasure{
         loadSentenceVectorsFromModel();
 
     }
-    @Override
+
     public double getSimilarity(String sentence1ID, String sentence2ID) {
         Vector<Double> sentenceVector1 = sentenceVectors.get(String.valueOf(Integer.valueOf(sentence1ID)*2-1));
         Vector<Double> sentenceVector2 = sentenceVectors.get(String.valueOf(Integer.valueOf(sentence2ID)*2));

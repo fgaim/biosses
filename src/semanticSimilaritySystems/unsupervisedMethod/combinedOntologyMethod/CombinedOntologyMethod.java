@@ -27,7 +27,7 @@ public class CombinedOntologyMethod implements SimilarityMeasure{
         return dictionary;
     }
     public static HashSet<String> constructDictionary(String sentence1, String sentence2){
-        HashSet<String> dictionary = new HashSet<>();
+        HashSet<String> dictionary = new HashSet<String>();
 
         dictionary = addSentenceToDictionary(dictionary, sentence1);
 
@@ -64,11 +64,11 @@ public class CombinedOntologyMethod implements SimilarityMeasure{
 
         /*LISTEYI DOGRU SORT EDEMEDIK DUZELTME VE KONTROL YAP!!
          *  */
-        Vector<Double> vector = new Vector<>();
+        Vector<Double> vector = new Vector<Double>();
         String[] split = sentence.toLowerCase().split("\\s+");
         int vectorIndex = 0;
         for(String word: dictionary){
-            List<Double> scoresList = new ArrayList<>();
+            List<Double> scoresList = new ArrayList<Double>();
             for(String s: split){
                 scoresList.add(calculateSimilarityScore(s, word));
             }
@@ -80,8 +80,6 @@ public class CombinedOntologyMethod implements SimilarityMeasure{
         return  vector;
     }
 
-
-    @Override
     public double getSimilarity(String sentence1, String sentence2) throws SLIB_Exception, IOException {
 
         HashSet<String> dictionary  = constructDictionary(sentence1, sentence2);

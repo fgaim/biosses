@@ -12,7 +12,6 @@ import java.io.IOException;
 
 public class SimMetricFunctions implements SimilarityMeasure{
 
-    @Override
     public double getSimilarity(String sentence1, String sentence2) throws IOException {
 
         StringMetric metric = StringMetrics.qGramsDistance();
