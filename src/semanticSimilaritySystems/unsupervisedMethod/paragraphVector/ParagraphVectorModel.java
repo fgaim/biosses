@@ -27,7 +27,7 @@ public class ParagraphVectorModel {
     }
 
     public Vector<Double> getDoubleVector(String line){
-        Vector<Double> vector = new Vector<>();
+        Vector<Double> vector = new Vector<Double>();
 
         String[] split = line.split("\\s+");
         int vecCount = 0;
@@ -42,7 +42,7 @@ public class ParagraphVectorModel {
     public HashMap<String, Vector<Double>> readModelFile() throws IOException {
         BufferedReader buffer = openFile();
 
-        HashMap<String, Vector<Double>> sentenceVectors = new HashMap<>();
+        HashMap<String, Vector<Double>> sentenceVectors = new HashMap<String, Vector<Double>>();
         String line;int count = 1 ;
         while((line=buffer.readLine())!=null && count <= 200){
            // System.out.println(line);

@@ -27,7 +27,7 @@ public class Main {
         return dictionary;
     }
     public static HashSet<String> constructDictionary(List<Pair> pairList){
-        HashSet<String> dictionary = new HashSet<>();
+        HashSet<String> dictionary = new HashSet<String>();
         for(Pair current: pairList){
 
             dictionary = addSentenceToDictionary(dictionary, current.getSentence1());

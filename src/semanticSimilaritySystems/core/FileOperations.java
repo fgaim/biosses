@@ -36,7 +36,7 @@ public class FileOperations {
     }
 
     public static List<Pair> readPairsFromFile(String filePath) throws IOException {
-        List<Pair> pairList = new LinkedList<>();
+        List<Pair> pairList = new LinkedList<Pair>();
         BufferedReader buffer = openFile(filePath);
         String line;
         while((line=buffer.readLine())!=null){

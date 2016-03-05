@@ -6,6 +6,7 @@ import edu.cmu.lti.lexical_db.NictWordNet;
 import edu.cmu.lti.lexical_db.data.Concept;
 import edu.cmu.lti.ws4j.Relatedness;
 import edu.cmu.lti.ws4j.RelatednessCalculator;
+import edu.cmu.lti.ws4j.impl.Lin;
 import edu.cmu.lti.ws4j.impl.Path;
 import edu.cmu.lti.ws4j.util.WS4JConfiguration;
 import edu.smu.tspell.wordnet.Synset;
@@ -19,20 +20,17 @@ import java.util.List;
  */
 public class WordNetSimilarity implements SimilarityMeasure {
 
-    public double getSimilarity(String word1, String word2) {
-
-        return calculateWordNetPairScore(word1, word2);
-    }
-
 
     public double calculateWordNetPairScore(String word1, String word2){
 
-        System.setProperty("wordnet.database.dir", "WordNet-3.0/dict");
+        // word1 = "love"; word2 = "like";
+        System.setProperty("wordnet.database.dir", "dict");
         WordNetDatabase database = WordNetDatabase.getFileInstance();
-        Synset[] synsets = database.getSynsets("lovely");
-        // word1 = Stem(word1); word2 = Stem(word2);
+        Synset[] synsets = database.getSynsets(word1);
+        //word1 = Stem(word1); word2 = Stem(word2);
         ILexicalDatabase db = new NictWordNet();
         WS4JConfiguration.getInstance().setMFS(true);
+
         RelatednessCalculator rc = new Path(db);
         List<POS[]> posPairs = rc.getPOSPairs();
         double maxScore = -1D;
@@ -54,10 +52,13 @@ public class WordNetSimilarity implements SimilarityMeasure {
         if (maxScore == -1D)
             maxScore = 0.0;
 
-        System.out.println("sim('" + word1 + "', '" + word2 + "') =  " + maxScore);
+        //   System.out.println("sim('" + word1 + "', '" + word2 + "') =  " + maxScore);
         return maxScore;
-
     }
 
 
+    public double getSimilarity(String word1, String word2) {
+
+        return calculateWordNetPairScore(word1, word2);
+    }
 }

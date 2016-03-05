@@ -14,7 +14,6 @@ public class BaselineMethod implements SimilarityMeasure{
         this.dictionary = dictionary;
     }
 
-    @Override
     public double getSimilarity(String sentence1, String sentence2) throws SLIB_Exception {
         Vector<Double> vec1 = constructVectorForSentence(sentence1);
         Vector<Double> vec2  = constructVectorForSentence(sentence2);
@@ -28,8 +27,8 @@ public class BaselineMethod implements SimilarityMeasure{
         //This method takes an sentence as a parameter.
         //As a result, returns the corresponding
         String[] split = sentence.toLowerCase().split("\\s+");
-        Vector<Double> vec = new Vector<>();
-        HashMap<String, Double> hashOfSentence = new HashMap<>();
+        Vector<Double> vec = new Vector<Double>();
+        HashMap<String, Double> hashOfSentence = new HashMap<String, Double>();
 
         // Here we save each different word in a sentence and their corresponding 'term frequencies'.
         for(String s: split){

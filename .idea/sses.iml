@@ -12,6 +12,8 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="jaws-bin" level="project" />
+    <orderEntry type="library" name="simmetrics-core-4.1.0" level="project" />
     <orderEntry type="library" name="Maven: log4j:log4j:1.2.17" level="project" />
     <orderEntry type="library" name="Maven: nz.ac.waikato.cms.weka:weka-dev:3.7.11" level="project" />
     <orderEntry type="library" name="Maven: net.sf.squirrel-sql.thirdparty-non-maven:java-cup:0.11a" level="project" />
@@ -91,8 +93,8 @@
     <orderEntry type="library" name="Maven: com.github.sharispe:slib-graph-utils:0.9.1" level="project" />
     <orderEntry type="library" name="Maven: net.sf.opencsv:opencsv:2.3" level="project" />
     <orderEntry type="library" name="Maven: org.apache.lucene:lucene-core:4.9.0" level="project" />
+    <orderEntry type="library" name="Maven: com.github.mpkorstanje:simmetrics:4.1.0" level="project" />
     <orderEntry type="library" name="Maven: com.google.guava:guava:19.0" level="project" />
-    <orderEntry type="library" name="jaws-bin" level="project" />
-    <orderEntry type="library" name="simmetrics-core-4.1.0" level="project" />
+    <orderEntry type="library" name="Maven: gov.sandia.foundry:porter-stemmer:1.4" level="project" />
   </component>
 </module>
