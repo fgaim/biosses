@@ -38,6 +38,7 @@ public class UmlsSimilarity implements SimilarityMeasure {
 
     }
 
+
      public static double calculateUmlsPairScore(String word1, String word2) throws SLIB_Exception, IOException {
 
          double similarityScore = 0;
@@ -53,10 +54,15 @@ public class UmlsSimilarity implements SimilarityMeasure {
          while (true) {
              line = r.readLine();
              if (line == null) { break; }
-             if(line.contains(word1)){
+            // System.out.println(line);
+             if(line.contains(word1) && line.contains(word2)){
                  String[] split = line.split("<>");
-                 System.out.println(split[0]);
-                 similarityScore = Double.valueOf(split[0]);
+                // System.out.println(split[0]);
+                 try {
+                     similarityScore=Double.parseDouble(split[0]);
+
+                 } catch (NumberFormatException e) {
+                 }
              }
 
          }

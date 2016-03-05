@@ -129,7 +129,7 @@ public class Test {
         correlation = calculateCorrelation(lsa, groundTruthMean);
         System.out.println("Correlation result between OUR METHOD-(LSA) and GROUNDTRUTH is: " + correlation);
 
-        DoubleVector onlyWordnet = readCorrelationFiles("correlationResult/ourResults/a.txt");
+        DoubleVector onlyWordnet = readCorrelationFiles("correlationResult/ourResults/onlyWordnet.txt");
         correlation = calculateCorrelation(onlyWordnet, groundTruthMean);
         System.out.println("Correlation result between OUR METHOD-(ONLY WORDNET) and GROUNDTRUTH is: " + correlation);
 

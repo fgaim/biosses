@@ -3,7 +3,7 @@ import semanticSimilaritySystems.core.SimilarityMeasure;
 import similarityMeasures.CosineSimilarity;
 import slib.utils.ex.SLIB_Exception;
 
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
 
 /**
@@ -14,7 +14,7 @@ public class CombinedOntologyMethod implements SimilarityMeasure{
     private UmlsSimilarity umls_similarity_score;
     private WordNetSimilarity wordnet_similarity_score;
 
-    public static HashSet<String> addSentenceToDictionary(HashSet<String> dictionary, String sentence){
+    public HashSet<String> addSentenceToDictionary(HashSet<String> dictionary, String sentence){
         String[] split = sentence.toLowerCase().split("\\s+");
         for(String word:split){
             if(!dictionary.contains(word))
@@ -23,7 +23,24 @@ public class CombinedOntologyMethod implements SimilarityMeasure{
 
         return dictionary;
     }
-    public static HashSet<String> constructDictionary(String sentence1, String sentence2){
+    public String removePunctuations(String word){
+
+        word = word.replaceAll("\\.", "");
+        word = word.replaceAll(",", "");
+        word = word.replaceAll(";", "");
+        word = word.replaceAll(":", "");
+        word = word.replaceAll("\\?", "");
+        word = word.replaceAll("\\(", "");
+        word = word.replaceAll("\\)", "");
+        word = word.replaceAll("\\[", "");
+        word = word.replaceAll("\\]", "");
+        word = word.replaceAll("\\{", "");
+
+        word = word.replaceAll("\\}", "");
+        word = word.replaceAll("\\!", "");
+        return word;
+    }
+    public HashSet<String> constructDictionary(String sentence1, String sentence2){
         HashSet<String> dictionary = new HashSet<String>();
 
         dictionary = addSentenceToDictionary(dictionary, sentence1);
@@ -32,50 +49,100 @@ public class CombinedOntologyMethod implements SimilarityMeasure{
 
         return dictionary;
     }
+    public static void main(String args[]) throws IOException {
+        getMetamapResult("It has recently been shown that Craf is essential for Kras G12D-induced NSCLC." );
 
-    public static double calculateSimilarityScore(String word1 , String word2) throws SLIB_Exception {
+        getMetamapResult("Tumorigenesis is a multistage process that involves multiple cell types.");
+    }
 
-        double wordNet_similarity_score = 0;
+    public static String getMetamapResult(String sentence) throws IOException {
+
+        BufferedWriter buffer = new BufferedWriter(new FileWriter(new File("input.txt")));
+        buffer.write(sentence);
+        buffer.close();
+
+        GenericBatchNew batch = new GenericBatchNew();
+        String[] args = new String[5];
+        args[0] = "--command";
+        args[1] = "metamap";
+        args[2] = "--email";
+        args[3] = "gizemsogancioglu@gmail.com";
+        args[4] = "input.txt";
+        batch.main(args);
+
+        return "";
+    }
+    public double calculateOnlyWordnetScores(String word1, String word2){
+        double similarityScore = 0.0;
+
+        WordNetSimilarity wordNet_similarity_measure = new WordNetSimilarity();
+        double wordNet_similarity_score = wordNet_similarity_measure.getSimilarity(word1, word2);
+        if (wordNet_similarity_score > 0)
+            similarityScore = wordNet_similarity_score;
+
+        return similarityScore;
+    }
+
+    public double calculateOnlyUmlsScores(String word1, String word2) throws SLIB_Exception, IOException {
+        double similarityScore = 0.0;
+        UmlsSimilarity umls_similarity_measure = new UmlsSimilarity();
+        double umls_similarity_score = umls_similarity_measure.getSimilarity(word1, word2);
+
+        if(umls_similarity_score > 0)
+            similarityScore = umls_similarity_score;
+
+
+        return similarityScore;
+    }
+    public double calculateCombinedSimilarityScore(String word1 , String word2) throws SLIB_Exception, IOException {
+
+        double similarityScore = 0.0;
         /*
         *EGER WORDNETTE ISTENILEN SKOR YOKSA, SIFIR DONDU ISE UMLS-SIM CALISTIRILMALI.
          * WEIGHTED SCORE YAPILABILIR, EGER UMLS'DE MATCH YAPILDIYSA AGIRLIGI DAHA FAZLA OLMALI IKI KAT FALAN
           *
-          * IDF SKORLARI HESAA KATILABILIR
+          * IDF SKORLARI HESABA KATILABILIR
           * AYNI ZAMANDA MAKALEDEKI YONTEME BENZER SEKILDE
           * KELIME ORDERLARI DA HESABA KATILABILIR
           * EGER BASARILI CIKARSA,
           * KELIME ORDERLARINI SUPERVISED YAKLASIMIMIZDA DENEYECEGIZ
         *
         * */
-
-
-         UmlsSimilarity umls_similarity_measure = new UmlsSimilarity();
-        // double umls_similarity_score = umls_similarity_measure.getSimilarity(word1, word2);
-
-        WordNetSimilarity wordNet_similarity_measure = new WordNetSimilarity();
         if(word1.equalsIgnoreCase(word2)){
-            wordNet_similarity_score = 1;
-        }
-        else{
-            wordNet_similarity_score = wordNet_similarity_measure.getSimilarity(word1,word2);
+            similarityScore = 1;
         }
 
-        if(wordNet_similarity_score == -1.0)
-            wordNet_similarity_score = 0 ;
+        else {
+            UmlsSimilarity umls_similarity_measure = new UmlsSimilarity();
+            double umls_similarity_score = umls_similarity_measure.getSimilarity(word1, word2);
 
-        return wordNet_similarity_score;
+            if(umls_similarity_score > 0)
+                similarityScore = umls_similarity_score;
+//            else {
+//                WordNetSimilarity wordNet_similarity_measure = new WordNetSimilarity();
+//                double wordNet_similarity_score = wordNet_similarity_measure.getSimilarity(word1, word2);
+//                if (wordNet_similarity_score > 0)
+//                    similarityScore = wordNet_similarity_score;
+//            }
+        }
+
+        //System.out.println(word1 + " " + word2 + " " +similarityScore);
+
+        return similarityScore;
     }
-    public static Vector<Double> constructVectorForSentence(String sentence, HashSet<String> dictionary) throws SLIB_Exception {
+
+    public Vector<Double> constructVectorForSentence(String sentence, HashSet<String> dictionary) throws SLIB_Exception, IOException {
 
         /*LISTEYI DOGRU SORT EDEMEDIK DUZELTME VE KONTROL YAP!!
          *  */
+
         Vector<Double> vector = new Vector<Double>();
         String[] split = sentence.toLowerCase().split("\\s+");
         int vectorIndex = 0;
         for(String word: dictionary){
             List<Double> scoresList = new ArrayList<Double>();
             for(String s: split){
-                scoresList.add(calculateSimilarityScore(s, word));
+                scoresList.add(calculateCombinedSimilarityScore(removePunctuations(s), removePunctuations(word)));
             }
             Collections.sort(scoresList);
             vector.add(vectorIndex, scoresList.get(scoresList.size()-1));

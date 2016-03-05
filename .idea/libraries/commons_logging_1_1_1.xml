@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="commons-logging-1.1.1">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/METAMAP/SKR_Web_API_V2_1/lib/commons-logging-1.1.1.jar!/" />
+      <root url="jar://$USER_HOME$/METAMAP/SKR_Web_API_V2_1/lib/httpclient-4.1.1.jar!/" />
+      <root url="jar://$USER_HOME$/METAMAP/SKR_Web_API_V2_1/lib/httpclient-cache-4.1.1.jar!/" />
+      <root url="jar://$USER_HOME$/METAMAP/SKR_Web_API_V2_1/lib/httpcore-4.1.jar!/" />
+      <root url="jar://$USER_HOME$/METAMAP/SKR_Web_API_V2_1/lib/httpcore-nio-4.1.jar!/" />
+      <root url="jar://$USER_HOME$/METAMAP/SKR_Web_API_V2_1/lib/httpmime-4.1.1.jar!/" />
+      <root url="jar://$USER_HOME$/METAMAP/SKR_Web_API_V2_1/lib/skrAPI.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
