@@ -3,6 +3,7 @@ package semanticSimilaritySystems.core;
 import semanticSimilaritySystems.baseline.BaselineMethod;
 import semanticSimilaritySystems.baseline.SimMetricFunctions;
 import semanticSimilaritySystems.unsupervisedMethod.LSA.LsaDocumentSimilarity;
+import semanticSimilaritySystems.unsupervisedMethod.combinedOntologyMethod.CombinedOntologyMethod;
 import semanticSimilaritySystems.unsupervisedMethod.paragraphVector.ParagraphVector;
 import semanticSimilaritySystems.unsupervisedMethod.paragraphVector.ParagraphVectorModel;
 import slib.utils.ex.SLIB_Exception;
@@ -41,16 +42,21 @@ public class Main {
 
         /****************************BASELINE**********************************************/
         SimilarityMeasure measure = new BaselineMethod(constructDictionary(pairList));
-      //  for(Pair currentPair: pairList){
-          //  double similarityScore =measure.getSimilarity(currentPair.getSentence1(), currentPair.getSentence2());
-           // System.out.println(similarityScore);
-       // }
+        //  for(Pair currentPair: pairList){
+        //  double similarityScore =measure.getSimilarity(currentPair.getSentence1(), currentPair.getSentence2());
+        // System.out.println(similarityScore);
+        // }
+
+        /**********************************************************************************/
+
+
+        /****************************SIMMETRICS***************************************************/
 
         measure = new SimMetricFunctions();
-        for(Pair currentPair: pairList){
-              double similarityScore =measure.getSimilarity(currentPair.getSentence1(), currentPair.getSentence2());
-             System.out.println(similarityScore);
-        }
+//        for(Pair currentPair: pairList){
+//              double similarityScore =measure.getSimilarity(currentPair.getSentence1(), currentPair.getSentence2());
+//             System.out.println(similarityScore);
+//        }
 
         /**********************************************************************************/
 
@@ -59,7 +65,7 @@ public class Main {
 
         /********************************PARAGRAPH VECTOR**********************************/
 
-        measure = new ParagraphVector(new ParagraphVectorModel("paragraphVector/sentence_vectors.txt"));
+        //   measure = new ParagraphVector(new ParagraphVectorModel("paragraphVector/sentence_vectors.txt"));
 //        for(Pair currentPair: pairList){
 //       //     double similarityScore =measure.getSimilarity(currentPair.getPairId(), currentPair.getPairId());
 //     //       System.out.println(similarityScore);
@@ -76,6 +82,17 @@ public class Main {
 //           // System.out.println(similarityScore);
 //        }
         /**********************************************************************************/
+
+        /**************************************ONLY WORDNET**************************************/
+
+        measure = new CombinedOntologyMethod();
+        for(Pair currentPair: pairList){
+            double similarityScore =measure.getSimilarity(currentPair.getSentence1(), currentPair.getSentence2());
+            System.out.println(similarityScore);
+        }
+
+        /**********************************************************************************/
+
     }
 
 
@@ -85,7 +102,5 @@ public class Main {
         pairList = operations.readPairsFromFile("sentencePairsData/pairs.txt");
 
         calculateSimilarityScoreAmongSentences(pairList);
-
-
     }
 }

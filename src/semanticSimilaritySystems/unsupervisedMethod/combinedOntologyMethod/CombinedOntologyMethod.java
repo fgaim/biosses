@@ -1,12 +1,9 @@
 package semanticSimilaritySystems.unsupervisedMethod.combinedOntologyMethod;
-
-import semanticSimilaritySystems.core.Pair;
 import semanticSimilaritySystems.core.SimilarityMeasure;
 import similarityMeasures.CosineSimilarity;
 import slib.utils.ex.SLIB_Exception;
 
 import java.io.IOException;
-import java.lang.invoke.SwitchPoint;
 import java.util.*;
 
 /**
@@ -38,6 +35,7 @@ public class CombinedOntologyMethod implements SimilarityMeasure{
 
     public static double calculateSimilarityScore(String word1 , String word2) throws SLIB_Exception {
 
+        double wordNet_similarity_score = 0;
         /*
         *EGER WORDNETTE ISTENILEN SKOR YOKSA, SIFIR DONDU ISE UMLS-SIM CALISTIRILMALI.
          * WEIGHTED SCORE YAPILABILIR, EGER UMLS'DE MATCH YAPILDIYSA AGIRLIGI DAHA FAZLA OLMALI IKI KAT FALAN
@@ -51,12 +49,19 @@ public class CombinedOntologyMethod implements SimilarityMeasure{
         * */
 
 
-        UmlsSimilarity umls_similarity_measure = new UmlsSimilarity();
-        double umls_similarity_score = umls_similarity_measure.getSimilarity(word1, word2);
+         UmlsSimilarity umls_similarity_measure = new UmlsSimilarity();
+        // double umls_similarity_score = umls_similarity_measure.getSimilarity(word1, word2);
 
         WordNetSimilarity wordNet_similarity_measure = new WordNetSimilarity();
-        double wordNet_similarity_score = wordNet_similarity_measure.getSimilarity(word1,word2);
+        if(word1.equalsIgnoreCase(word2)){
+            wordNet_similarity_score = 1;
+        }
+        else{
+            wordNet_similarity_score = wordNet_similarity_measure.getSimilarity(word1,word2);
+        }
 
+        if(wordNet_similarity_score == -1.0)
+            wordNet_similarity_score = 0 ;
 
         return wordNet_similarity_score;
     }
@@ -72,13 +77,14 @@ public class CombinedOntologyMethod implements SimilarityMeasure{
             for(String s: split){
                 scoresList.add(calculateSimilarityScore(s, word));
             }
-            Arrays.sort(scoresList.toArray());
-            vector.add(vectorIndex, scoresList.get(0));
+            Collections.sort(scoresList);
+            vector.add(vectorIndex, scoresList.get(scoresList.size()-1));
             vectorIndex++;
         }
 
         return  vector;
     }
+
 
     public double getSimilarity(String sentence1, String sentence2) throws SLIB_Exception, IOException {
 
@@ -88,7 +94,7 @@ public class CombinedOntologyMethod implements SimilarityMeasure{
         Vector<Double> vector2 = constructVectorForSentence(sentence2, dictionary);
 
         CosineSimilarity similarityMeasure = new CosineSimilarity(vector1, vector2);
-        Double similarityScore = similarityMeasure.calculateDistanceAmongVectors();
+        double similarityScore = similarityMeasure.calculateDistanceAmongVectors();
         return similarityScore;
     }
 }

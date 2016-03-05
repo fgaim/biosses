@@ -128,6 +128,11 @@ public class Test {
         DoubleVector lsa = readCorrelationFiles("correlationResult/ourResults/lsa.txt");
         correlation = calculateCorrelation(lsa, groundTruthMean);
         System.out.println("Correlation result between OUR METHOD-(LSA) and GROUNDTRUTH is: " + correlation);
+
+        DoubleVector onlyWordnet = readCorrelationFiles("correlationResult/ourResults/a.txt");
+        correlation = calculateCorrelation(onlyWordnet, groundTruthMean);
+        System.out.println("Correlation result between OUR METHOD-(ONLY WORDNET) and GROUNDTRUTH is: " + correlation);
+
         System.out.println("\n************************************************************************\n");
 
     }
@@ -136,7 +141,7 @@ public class Test {
 
         DoubleVector groundTruthMean = readCorrelationFiles("correlationResult/groundTruth/MEAN.txt");
         evaluateBaselineResults(groundTruthMean);
-       // evaluateEachAnnotatorCorrelations(groundTruthMean);
+        // evaluateEachAnnotatorCorrelations(groundTruthMean);
         evaluateStateOfTheArtSystems(groundTruthMean);
         evaluateOurMethods(groundTruthMean);
 

@@ -4,9 +4,7 @@ package semanticSimilaritySystems.unsupervisedMethod.combinedOntologyMethod;
  * Created by orhan on 31.01.2016.
  */
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
 
 import org.openrdf.model.URI;
@@ -29,26 +27,39 @@ import slib.utils.ex.SLIB_Exception;
 import slib.utils.impl.Timer;
 public class UmlsSimilarity implements SimilarityMeasure {
 
-    public double getSimilarity(String word1, String word2) throws SLIB_Exception {
+    public double getSimilarity(String word1, String word2) throws SLIB_Exception, IOException {
 
         return calculateUmlsPairScore(word1, word2);
     }
 
     public static void main(String[] args) throws Exception {
 
-
-        //calculateUmlsPairScore("", "");
-        method();
+        calculateUmlsPairScore("hand", "skull");
 
     }
-    public static void method() throws Exception {
 
+     public static double calculateUmlsPairScore(String word1, String word2) throws SLIB_Exception, IOException {
 
-    }
-     public static double calculateUmlsPairScore(String word1, String word2) throws SLIB_Exception {
+         double similarityScore = 0;
+         String[] command = {"query-umls-similarity-webinterface.pl", word1, word2};
+         ProcessBuilder builder = new ProcessBuilder( command );
+         File commandDir = new File("/home/gizem/WorkingProjectFolder/UMLS-Similarity/webInterface/"  +"UMLS-Similarity-1.45/utils");
+         builder.directory(commandDir);
+         builder.redirectErrorStream(true);
+         Process p = builder.start();
 
+         BufferedReader r = new BufferedReader(new InputStreamReader(p.getInputStream()));
+         String line;
+         while (true) {
+             line = r.readLine();
+             if (line == null) { break; }
+             if(line.contains(word1)){
+                 String[] split = line.split("<>");
+                 System.out.println(split[0]);
+                 similarityScore = Double.valueOf(split[0]);
+             }
 
-        return 0;
-
+         }
+         return similarityScore;
     }
 }
