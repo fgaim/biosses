@@ -89,6 +89,7 @@ public class Main {
         for(Pair currentPair: pairList){
             double similarityScore =measure.getSimilarity(currentPair.getSentence1(), currentPair.getSentence2());
             System.out.println(similarityScore);
+            break;
         }
 
         /**********************************************************************************/

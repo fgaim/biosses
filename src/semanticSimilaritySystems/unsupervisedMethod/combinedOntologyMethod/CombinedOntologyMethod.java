@@ -1,5 +1,8 @@
 package semanticSimilaritySystems.unsupervisedMethod.combinedOntologyMethod;
+import org.openrdf.query.algebra.Str;
+import semanticSimilaritySystems.core.Sentence;
 import semanticSimilaritySystems.core.SimilarityMeasure;
+import semanticSimilaritySystems.core.Word;
 import similarityMeasures.CosineSimilarity;
 import slib.utils.ex.SLIB_Exception;
 
@@ -13,50 +16,95 @@ public class CombinedOntologyMethod implements SimilarityMeasure{
 
     private UmlsSimilarity umls_similarity_score;
     private WordNetSimilarity wordnet_similarity_score;
+    static HashSet<String> stringDict;
 
-    public HashSet<String> addSentenceToDictionary(HashSet<String> dictionary, String sentence){
-        String[] split = sentence.toLowerCase().split("\\s+");
-        for(String word:split){
-            if(!dictionary.contains(word))
+    public HashSet<Word> addSentenceToDictionary(HashSet<Word> dictionary,  Sentence sentence){
+         for(Word word:sentence.getWords()){
+            if(!stringDict.contains(word.getWord().toLowerCase())){
                 dictionary.add(word);
+                stringDict.add(word.getWord().toLowerCase());
+            }
         }
-
         return dictionary;
     }
-    public String removePunctuations(String word){
 
-        word = word.replaceAll("\\.", "");
-        word = word.replaceAll(",", "");
-        word = word.replaceAll(";", "");
-        word = word.replaceAll(":", "");
-        word = word.replaceAll("\\?", "");
-        word = word.replaceAll("\\(", "");
-        word = word.replaceAll("\\)", "");
-        word = word.replaceAll("\\[", "");
-        word = word.replaceAll("\\]", "");
-        word = word.replaceAll("\\{", "");
-
-        word = word.replaceAll("\\}", "");
-        word = word.replaceAll("\\!", "");
-        return word;
-    }
-    public HashSet<String> constructDictionary(String sentence1, String sentence2){
-        HashSet<String> dictionary = new HashSet<String>();
-
+    public HashSet<Word> constructDictionary(Sentence sentence1, Sentence sentence2){
+        HashSet<Word> dictionary = new HashSet<Word>();
+        stringDict = new HashSet<String>();
         dictionary = addSentenceToDictionary(dictionary, sentence1);
-
         dictionary = addSentenceToDictionary(dictionary, sentence2);
 
         return dictionary;
     }
-    public static void main(String args[]) throws IOException {
-        getMetamapResult("It has recently been shown that Craf is essential for Kras G12D-induced NSCLC." );
 
-        getMetamapResult("Tumorigenesis is a multistage process that involves multiple cell types.");
+    public static void main(String[] args) throws IOException {
+        getMetamapResult("Tumorigenesis is a multistage process that involves multiple cell types Non Small Cell Lung Carcinoma.");
     }
 
-    public static String getMetamapResult(String sentence) throws IOException {
+    public static Sentence fillSentenceWithMetamapResults(String results){
+        Sentence mappedSentence = new Sentence(); mappedSentence.setWords(new LinkedList<Word>());
+        boolean metamapping = false;
+        boolean newPhrase = false;
+        String[] split = results.split("\n");
+        String preTerm="";
+        int wordIndex = 0;
+        for(String s: split){
+            if(!s.equals("")){
+                if(s.contains("Phrase:") ){
+                    //SAVE PREVIOUS ONE
+                    if(newPhrase && !metamapping) {
+                        System.out.println("Not umls word: " + preTerm);
+                        Word word = new Word();
+                        word.setWord(preTerm);
+                        word.setInUmls(false);
+                        mappedSentence.getWords().add(wordIndex, word);
+                        wordIndex++;
+                    }
 
+                    newPhrase = true;
+                    metamapping = false;
+                    s = s.replace("Phrase: " ,"");
+                    s = s.trim();
+                    preTerm = s;
+
+                }
+                else if(s.contains("Meta Mapping")){
+                    if(metamapping && newPhrase)
+                        newPhrase = false;
+                    metamapping = true;
+
+
+                }
+                else{
+                    if(newPhrase && metamapping){
+                        s = s.trim();
+                        int index = 0;
+                        if(s.contains("(")){
+                            index = s.indexOf("(");
+                        }
+                        else{
+                            index = s.indexOf("[");
+                        }
+                        s = s.substring(0, index);
+                        String[] splitSentence = s.split("\\s+");
+                        s = s.replace(splitSentence[0], "").trim();
+                        Word newWord = new Word();
+                        newWord.setInUmls(true);
+                        newWord.setWord(s);
+                        mappedSentence.getWords().add(wordIndex, newWord);
+                        System.out.println(s);
+
+                    }
+
+                }
+
+            }
+
+        }
+        return mappedSentence;
+    }
+
+    public static Sentence getMetamapResult(String sentence) throws IOException {
         BufferedWriter buffer = new BufferedWriter(new FileWriter(new File("input.txt")));
         buffer.write(sentence);
         buffer.close();
@@ -68,9 +116,9 @@ public class CombinedOntologyMethod implements SimilarityMeasure{
         args[2] = "--email";
         args[3] = "gizemsogancioglu@gmail.com";
         args[4] = "input.txt";
-        batch.main(args);
+        String results = batch.main(args);
 
-        return "";
+        return fillSentenceWithMetamapResults(results);
     }
     public double calculateOnlyWordnetScores(String word1, String word2){
         double similarityScore = 0.0;
@@ -94,7 +142,7 @@ public class CombinedOntologyMethod implements SimilarityMeasure{
 
         return similarityScore;
     }
-    public double calculateCombinedSimilarityScore(String word1 , String word2) throws SLIB_Exception, IOException {
+    public double calculateCombinedSimilarityScore(Word word1 , Word word2) throws SLIB_Exception, IOException {
 
         double similarityScore = 0.0;
         /*
@@ -108,22 +156,24 @@ public class CombinedOntologyMethod implements SimilarityMeasure{
           * KELIME ORDERLARINI SUPERVISED YAKLASIMIMIZDA DENEYECEGIZ
         *
         * */
-        if(word1.equalsIgnoreCase(word2)){
+        if (word1.getWord().equalsIgnoreCase(word2.getWord())) {
             similarityScore = 1;
-        }
+        } else {
+            if (word1.isInUmls() && word2.isInUmls()) {
 
-        else {
-            UmlsSimilarity umls_similarity_measure = new UmlsSimilarity();
-            double umls_similarity_score = umls_similarity_measure.getSimilarity(word1, word2);
+                UmlsSimilarity umls_similarity_measure = new UmlsSimilarity();
+                double umls_similarity_score = umls_similarity_measure.getSimilarity(word1.getWord(), word2.getWord());
 
-            if(umls_similarity_score > 0)
-                similarityScore = umls_similarity_score;
+                if (umls_similarity_score > 0)
+                    similarityScore = umls_similarity_score;
+
 //            else {
 //                WordNetSimilarity wordNet_similarity_measure = new WordNetSimilarity();
 //                double wordNet_similarity_score = wordNet_similarity_measure.getSimilarity(word1, word2);
 //                if (wordNet_similarity_score > 0)
 //                    similarityScore = wordNet_similarity_score;
 //            }
+            }
         }
 
         //System.out.println(word1 + " " + word2 + " " +similarityScore);
@@ -131,18 +181,17 @@ public class CombinedOntologyMethod implements SimilarityMeasure{
         return similarityScore;
     }
 
-    public Vector<Double> constructVectorForSentence(String sentence, HashSet<String> dictionary) throws SLIB_Exception, IOException {
+    public Vector<Double> constructVectorForSentence(Sentence sentence, HashSet<Word> dictionary) throws SLIB_Exception, IOException {
 
         /*LISTEYI DOGRU SORT EDEMEDIK DUZELTME VE KONTROL YAP!!
          *  */
 
         Vector<Double> vector = new Vector<Double>();
-        String[] split = sentence.toLowerCase().split("\\s+");
         int vectorIndex = 0;
-        for(String word: dictionary){
+        for(Word word: dictionary){
             List<Double> scoresList = new ArrayList<Double>();
-            for(String s: split){
-                scoresList.add(calculateCombinedSimilarityScore(removePunctuations(s), removePunctuations(word)));
+            for(Word s: sentence.getWords()){
+                scoresList.add(calculateCombinedSimilarityScore(s, word));
             }
             Collections.sort(scoresList);
             vector.add(vectorIndex, scoresList.get(scoresList.size()-1));
@@ -155,10 +204,13 @@ public class CombinedOntologyMethod implements SimilarityMeasure{
 
     public double getSimilarity(String sentence1, String sentence2) throws SLIB_Exception, IOException {
 
-        HashSet<String> dictionary  = constructDictionary(sentence1, sentence2);
+        Sentence mappedSentence1 = getMetamapResult(sentence1);
+        Sentence mappedSentence2 = getMetamapResult(sentence2);
 
-        Vector<Double> vector1 = constructVectorForSentence(sentence1, dictionary);
-        Vector<Double> vector2 = constructVectorForSentence(sentence2, dictionary);
+        HashSet<Word> dictionary  = constructDictionary(mappedSentence1, mappedSentence2);
+
+        Vector<Double> vector1 = constructVectorForSentence(mappedSentence1, dictionary);
+        Vector<Double> vector2 = constructVectorForSentence(mappedSentence2, dictionary);
 
         CosineSimilarity similarityMeasure = new CosineSimilarity(vector1, vector2);
         double similarityScore = similarityMeasure.calculateDistanceAmongVectors();

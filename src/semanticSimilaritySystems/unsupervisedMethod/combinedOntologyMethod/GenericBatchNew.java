@@ -52,6 +52,7 @@ package semanticSimilaritySystems.unsupervisedMethod.combinedOntologyMethod;
 
 
 import java.io.*;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.ArrayList;
 import gov.nih.nlm.nls.skr.*;
@@ -95,8 +96,10 @@ static {
     System.exit(1);
   }
 
-  public static void main(String args[])
+  public static String main(String args[])
   {
+
+      String results="";
     // NOTE: You MUST specify an email address because it is used for
     //       logging purposes.
     String emailAddress = null;
@@ -190,19 +193,22 @@ static {
     // Submit the job request
     try
       {
-	String results = myGenericObj.handleSubmission();
-	System.out.print(results);
+        results = myGenericObj.handleSubmission();
+          //System.out.print(results);
 
       } catch (RuntimeException ex) {
-      System.err.println("");
-      System.err.print("An ERROR has occurred while processing your");
-      System.err.println(" request, please review any");
-      System.err.print("lines beginning with \"Error:\" above and the");
-      System.err.println(" trace below for indications of");
-      System.err.println("what may have gone wrong.");
-      System.err.println("");
-      System.err.println("Trace:");
-      ex.printStackTrace();
-    } // catch
+
+        System.err.println("");
+        System.err.print("An ERROR has occurred while processing your");
+        System.err.println(" request, please review any");
+        System.err.print("lines beginning with \"Error:\" above and the");
+        System.err.println(" trace below for indications of");
+        System.err.println("what may have gone wrong.");
+        System.err.println("");
+        System.err.println("Trace:");
+        ex.printStackTrace();
+        } // catch
+        return results;
+
   } // main
 } // class GenericBatchNew
