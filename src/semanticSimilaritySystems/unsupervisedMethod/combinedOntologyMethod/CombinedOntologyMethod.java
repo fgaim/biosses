@@ -76,18 +76,21 @@ public class CombinedOntologyMethod implements SimilarityMeasure{
 
                 }
                 else{
+                 //   System.out.println(s);
                     if(newPhrase && metamapping){
                         s = s.trim();
                         int index = 0;
                         if(s.contains("(")){
                             index = s.indexOf("(");
+                            int endIndex= s.lastIndexOf(")");
+                            s = s.substring(index+1, endIndex);
                         }
                         else{
                             index = s.indexOf("[");
+                            s = s.substring(0, index);
+                            String[] splitSentence = s.split("\\s+");
+                            s = s.replace(splitSentence[0], "").trim();
                         }
-                        s = s.substring(0, index);
-                        String[] splitSentence = s.split("\\s+");
-                        s = s.replace(splitSentence[0], "").trim();
                         Word newWord = new Word();
                         newWord.setInUmls(true);
                         newWord.setWord(s);
@@ -176,7 +179,7 @@ public class CombinedOntologyMethod implements SimilarityMeasure{
             }
         }
 
-        //System.out.println(word1 + " " + word2 + " " +similarityScore);
+        System.out.println(word1.getWord() + " " + word2.getWord() + " " +similarityScore);
 
         return similarityScore;
     }
