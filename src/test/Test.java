@@ -129,9 +129,58 @@ public class Test {
         correlation = calculateCorrelation(lsa, groundTruthMean);
         System.out.println("Correlation result between OUR METHOD-(LSA) and GROUNDTRUTH is: " + correlation);
 
-        DoubleVector onlyWordnet = readCorrelationFiles("correlationResult/ourResults/onlyWordnet.txt");
+
+        DoubleVector baselineCombination = readCorrelationFiles("correlationResult/ourResults/baselineCombination.txt");
+        correlation = calculateCorrelation(baselineCombination, groundTruthMean);
+        System.out.println("Correlation result between OUR METHOD-(ONLY BASELINE) and GROUNDTRUTH is: " + correlation);
+
+        System.out.println("\n************************************************************************\n");
+
+        DoubleVector onlyWordnet = readCorrelationFiles("correlationResult/ourResults/onlyWordnet/pathWordnet.txt");
         correlation = calculateCorrelation(onlyWordnet, groundTruthMean);
-        System.out.println("Correlation result between OUR METHOD-(ONLY WORDNET) and GROUNDTRUTH is: " + correlation);
+        System.out.println("Correlation result between OUR METHOD-(ONLY WORDNET - PATH) and GROUNDTRUTH is: " + correlation);
+
+        DoubleVector resnik = readCorrelationFiles("correlationResult/ourResults/onlyWordnet/resnikWordNet.txt");
+        correlation = calculateCorrelation(resnik, groundTruthMean);
+        System.out.println("Correlation result between OUR METHOD-(ONLY WORDNET - RESNIK) and GROUNDTRUTH is: " + correlation);
+
+        DoubleVector lin = readCorrelationFiles("correlationResult/ourResults/onlyWordnet/linWordNet.txt");
+        correlation = calculateCorrelation(lin, groundTruthMean);
+        System.out.println("Correlation result between OUR METHOD-(ONLY WORDNET - LIN) and GROUNDTRUTH is: " + correlation);
+
+
+        DoubleVector lesk = readCorrelationFiles("correlationResult/ourResults/onlyWordnet/lesk.txt");
+        correlation = calculateCorrelation(lesk, groundTruthMean);
+        System.out.println("Correlation result between OUR METHOD-(ONLY WORDNET - LESK) and GROUNDTRUTH is: " + correlation);
+
+
+
+        DoubleVector wuPalmer = readCorrelationFiles("correlationResult/ourResults/onlyWordnet/wuPalmer.txt");
+        correlation = calculateCorrelation(wuPalmer, groundTruthMean);
+        System.out.println("Correlation result between OUR METHOD-(ONLY WORDNET - WUANDPALMER) and GROUNDTRUTH is: " + correlation);
+
+        DoubleVector jiangConrath = readCorrelationFiles("correlationResult/ourResults/onlyWordnet/jiangConrath.txt");
+        correlation = calculateCorrelation(jiangConrath, groundTruthMean);
+        System.out.println("Correlation result between OUR METHOD-(ONLY WORDNET - JIANGCONRADTH) and GROUNDTRUTH is: " + correlation);
+
+
+        DoubleVector leacockChodorow = readCorrelationFiles("correlationResult/ourResults/onlyWordnet/leacockChodorow.txt");
+        correlation = calculateCorrelation(leacockChodorow, groundTruthMean);
+        System.out.println("Correlation result between OUR METHOD-(ONLY WORDNET - LEACOCKCHODOROW) and GROUNDTRUTH is: " + correlation);
+
+
+        DoubleVector vector = readCorrelationFiles("correlationResult/ourResults/onlyWordnet/vector.txt");
+        correlation = calculateCorrelation(vector, groundTruthMean);
+        System.out.println("Correlation result between OUR METHOD-(ONLY WORDNET - VECTOR) and GROUNDTRUTH is: " + correlation);
+
+
+        DoubleVector vectorPairs = readCorrelationFiles("correlationResult/ourResults/onlyWordnet/vectorPairs.txt");
+        correlation = calculateCorrelation(vectorPairs, groundTruthMean);
+        System.out.println("Correlation result between OUR METHOD-(ONLY WORDNET -  VECTOR-PAIRS) and GROUNDTRUTH is: " + correlation);
+
+//        DoubleVector test = readCorrelationFiles("correlationResult/ourResults/onlyWordnet/test.txt");
+//        correlation = calculateCorrelation(test, groundTruthMean);
+//        System.out.println("Correlation result between OUR METHOD-(ONLY TEST) and GROUNDTRUTH is: " + correlation);
 
         System.out.println("\n************************************************************************\n");
 

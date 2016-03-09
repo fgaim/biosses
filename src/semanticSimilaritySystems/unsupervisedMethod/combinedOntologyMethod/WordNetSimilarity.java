@@ -6,8 +6,7 @@ import edu.cmu.lti.lexical_db.NictWordNet;
 import edu.cmu.lti.lexical_db.data.Concept;
 import edu.cmu.lti.ws4j.Relatedness;
 import edu.cmu.lti.ws4j.RelatednessCalculator;
-import edu.cmu.lti.ws4j.impl.Lin;
-import edu.cmu.lti.ws4j.impl.Path;
+import edu.cmu.lti.ws4j.impl.*;
 import edu.cmu.lti.ws4j.util.WS4JConfiguration;
 import edu.smu.tspell.wordnet.Synset;
 import edu.smu.tspell.wordnet.WordNetDatabase;
@@ -31,7 +30,7 @@ public class WordNetSimilarity implements SimilarityMeasure {
         ILexicalDatabase db = new NictWordNet();
         WS4JConfiguration.getInstance().setMFS(true);
 
-        RelatednessCalculator rc = new Path(db);
+        RelatednessCalculator rc = new VectorPairs(db);
         List<POS[]> posPairs = rc.getPOSPairs();
         double maxScore = -1D;
 
@@ -52,7 +51,6 @@ public class WordNetSimilarity implements SimilarityMeasure {
         if (maxScore == -1D)
             maxScore = 0.0;
 
-        //   System.out.println("sim('" + word1 + "', '" + word2 + "') =  " + maxScore);
         return maxScore;
     }
 

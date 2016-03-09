@@ -43,6 +43,7 @@ public class CombinedOntologyMethod implements SimilarityMeasure{
 
     public static Sentence fillSentenceWithMetamapResults(String results){
         Sentence mappedSentence = new Sentence(); mappedSentence.setWords(new LinkedList<Word>());
+        mappedSentence.setStringWords(new LinkedList<String>());
         boolean metamapping = false;
         boolean newPhrase = false;
         String[] split = results.split("\n");
@@ -53,12 +54,16 @@ public class CombinedOntologyMethod implements SimilarityMeasure{
                 if(s.contains("Phrase:") ){
                     //SAVE PREVIOUS ONE
                     if(newPhrase && !metamapping) {
-                        System.out.println("Not umls word: " + preTerm);
-                        Word word = new Word();
-                        word.setWord(preTerm);
-                        word.setInUmls(false);
-                        mappedSentence.getWords().add(wordIndex, word);
-                        wordIndex++;
+                   //     System.out.println("Not umls word: " + preTerm);
+                        preTerm = replacePunctuations(preTerm);
+                        if(!preTerm.equals("")) {
+                            Word word = new Word();
+                            word.setWord(preTerm);
+                            word.setInUmls(false);
+                            mappedSentence.getWords().add(wordIndex, word);
+                            mappedSentence.getStringWords().add(wordIndex, word.getWord());
+                            wordIndex++;
+                        }
                     }
 
                     newPhrase = true;
@@ -72,8 +77,6 @@ public class CombinedOntologyMethod implements SimilarityMeasure{
                     if(metamapping && newPhrase)
                         newPhrase = false;
                     metamapping = true;
-
-
                 }
                 else{
                  //   System.out.println(s);
@@ -95,7 +98,8 @@ public class CombinedOntologyMethod implements SimilarityMeasure{
                         newWord.setInUmls(true);
                         newWord.setWord(s);
                         mappedSentence.getWords().add(wordIndex, newWord);
-                        System.out.println(s);
+                        mappedSentence.getStringWords().add(wordIndex, newWord.getWord());
+                       // System.out.println(s);
 
                     }
 
@@ -125,26 +129,44 @@ public class CombinedOntologyMethod implements SimilarityMeasure{
     }
     public double calculateOnlyWordnetScores(String word1, String word2){
         double similarityScore = 0.0;
+        word1 = replacePunctuations(word1);
+        word2 = replacePunctuations(word2);
+        if(word1.equals(word2))
+            return 1.0;
 
-        WordNetSimilarity wordNet_similarity_measure = new WordNetSimilarity();
-        double wordNet_similarity_score = wordNet_similarity_measure.getSimilarity(word1, word2);
-        if (wordNet_similarity_score > 0)
-            similarityScore = wordNet_similarity_score;
-
-        return similarityScore;
-    }
-
-    public double calculateOnlyUmlsScores(String word1, String word2) throws SLIB_Exception, IOException {
-        double similarityScore = 0.0;
-        UmlsSimilarity umls_similarity_measure = new UmlsSimilarity();
-        double umls_similarity_score = umls_similarity_measure.getSimilarity(word1, word2);
-
-        if(umls_similarity_score > 0)
-            similarityScore = umls_similarity_score;
-
+//        WordNetSimilarity wordNet_similarity_measure = new WordNetSimilarity();
+//        double wordNet_similarity_score = wordNet_similarity_measure.getSimilarity(word1, word2);
+//        if (wordNet_similarity_score != -1)
+//            similarityScore = wordNet_similarity_score;
 
         return similarityScore;
     }
+
+    public static String removeAllNonAsciiLetters(String text){
+        text =  text.replaceAll("[^\\x00-\\x7F]", "");
+        return text;
+    }
+
+    public double calculateOnlyUmlsScores(Word word1, Word word2) throws SLIB_Exception, IOException {
+         double similarityScore = 0.0;
+
+        if (word1.getWord().equalsIgnoreCase(word2.getWord())) {
+            similarityScore = 1;
+        }
+         else {
+            if (word1.isInUmls() && word2.isInUmls()) {
+
+                UmlsSimilarity umls_similarity_measure = new UmlsSimilarity();
+                double umls_similarity_score = umls_similarity_measure.getSimilarity(word1.getWord(), word2.getWord());
+
+                if (umls_similarity_score > 0)
+                    similarityScore = umls_similarity_score;
+
+            }
+        }
+        return similarityScore;
+    }
+
     public double calculateCombinedSimilarityScore(Word word1 , Word word2) throws SLIB_Exception, IOException {
 
         double similarityScore = 0.0;
@@ -161,25 +183,26 @@ public class CombinedOntologyMethod implements SimilarityMeasure{
         * */
         if (word1.getWord().equalsIgnoreCase(word2.getWord())) {
             similarityScore = 1;
-        } else {
-            if (word1.isInUmls() && word2.isInUmls()) {
-
-                UmlsSimilarity umls_similarity_measure = new UmlsSimilarity();
-                double umls_similarity_score = umls_similarity_measure.getSimilarity(word1.getWord(), word2.getWord());
-
-                if (umls_similarity_score > 0)
-                    similarityScore = umls_similarity_score;
-
-//            else {
-//                WordNetSimilarity wordNet_similarity_measure = new WordNetSimilarity();
-//                double wordNet_similarity_score = wordNet_similarity_measure.getSimilarity(word1, word2);
-//                if (wordNet_similarity_score > 0)
-//                    similarityScore = wordNet_similarity_score;
-//            }
-            }
         }
+//        } else {
+//            if (word1.isInUmls() && word2.isInUmls()) {
+//
+//                UmlsSimilarity umls_similarity_measure = new UmlsSimilarity();
+//                double umls_similarity_score = umls_similarity_measure.getSimilarity(word1.getWord(), word2.getWord());
+//
+//                if (umls_similarity_score > 0)
+//                    similarityScore = umls_similarity_score;
+//
+////            else {
+////                WordNetSimilarity wordNet_similarity_measure = new WordNetSimilarity();
+////                double wordNet_similarity_score = wordNet_similarity_measure.getSimilarity(word1, word2);
+////                if (wordNet_similarity_score > 0)
+////                    similarityScore = wordNet_similarity_score;
+////            }
+//            }
+//        }
 
-        System.out.println(word1.getWord() + " " + word2.getWord() + " " +similarityScore);
+     //   System.out.println(word1.getWord() + " " + word2.getWord() + " " +similarityScore);
 
         return similarityScore;
     }
@@ -191,24 +214,71 @@ public class CombinedOntologyMethod implements SimilarityMeasure{
 
         Vector<Double> vector = new Vector<Double>();
         int vectorIndex = 0;
-        for(Word word: dictionary){
+        for(Word word: dictionary) {
             List<Double> scoresList = new ArrayList<Double>();
-            for(Word s: sentence.getWords()){
-                scoresList.add(calculateCombinedSimilarityScore(s, word));
-            }
-            Collections.sort(scoresList);
-            vector.add(vectorIndex, scoresList.get(scoresList.size()-1));
-            vectorIndex++;
-        }
+            if (sentence.getStringWords().contains(word.getWord())) {
+                vector.add(vectorIndex, 1.0);
+                vectorIndex++;
 
+            } else {
+                for (Word s : sentence.getWords()) {
+                    double simScore = calculateOnlyUmlsScores(s, word);
+                    scoresList.add(simScore);
+                    if (simScore == 1.0)
+                        break;
+                }
+                Collections.sort(scoresList);
+                vector.add(vectorIndex, scoresList.get(scoresList.size() - 1));
+                vectorIndex++;
+            }
+        }
         return  vector;
     }
 
 
+    public static String replacePunctuations(String phrase){
+
+        phrase = phrase.trim();
+        phrase = phrase.replaceAll("\\.","");
+        phrase = phrase.replaceAll(";","");
+        phrase = phrase.replaceAll("-","");
+        phrase = phrase.replaceAll(":","");
+        phrase = phrase.replaceAll(",","");
+        phrase = phrase.replaceAll("_","");
+
+
+        return phrase.toLowerCase();
+    }
+
+    public static Sentence returnSentence(String sentence){
+        Sentence res = new Sentence();
+        res.setStringWords(new LinkedList<String>());
+        res.setWords(new LinkedList<Word>());
+        String[] split = sentence.split("\\s+");
+        int index = 0;
+        for(String s: split){
+            res.getStringWords().add(index, s.toLowerCase());
+            Word newW = new Word();
+            newW.setWord(s.toLowerCase());
+            res.getWords().add(index, newW);
+        }
+
+        return res;
+    }
+
     public double getSimilarity(String sentence1, String sentence2) throws SLIB_Exception, IOException {
 
-        Sentence mappedSentence1 = getMetamapResult(sentence1);
-        Sentence mappedSentence2 = getMetamapResult(sentence2);
+        Sentence mappedSentence1 = getMetamapResult(removeAllNonAsciiLetters(sentence1));
+        Sentence mappedSentence2 = getMetamapResult(removeAllNonAsciiLetters(sentence2));
+
+        if(mappedSentence1.getStringWords().size() == 0 || mappedSentence2.getStringWords().size() == 0){
+            System.out.println("METAMAP RESULT");
+            return 0;
+        }
+//
+//        Sentence mappedSentence1 =returnSentence(sentence1);
+//        Sentence mappedSentence2 = returnSentence(sentence2);
+//
 
         HashSet<Word> dictionary  = constructDictionary(mappedSentence1, mappedSentence2);
 
