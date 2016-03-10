@@ -1,0 +1,815 @@
+Identical
+human cell line
+Negative Regulation of G2 to M Transition
+K-ras Oncogene
+expression level
+GFPT1 gene
+Social Role
+Elevated
+Etiology
+Biochemical Pathway
+persistent
+LATS1 gene
+TET1 gene
+TP53 gene
+Accepted
+apparent
+Therapeutic procedure
+Western Blotting
+size
+Decreased
+Part
+Analysis
+inactivation
+are unit of measure
+Cessation of life
+TERC gene
+BRAF gene
+Cellular Stress Response
+Numerous
+100%
+IDH2 gene
+MAPK-ERK Kinases
+Biospecimen
+Personal status - Adopted
+At
+Geographic Locations
+CDISC Findings Class
+Clarify
+Biological Models
+Mouse Model
+Acquired (qualifier value)
+Periodontitis, Juvenile
+Cyclic AMP Response Element
+Independence
+GATA6 gene
+Depletion
+Made redundant (finding)
+French fries
+Signal Transduction Pathways
+Assisted (qualifier value)
+Combined
+HOXA@ gene cluster
+Nephroblastoma
+TRANSCRIPTION FACTOR
+Protein Domain
+Take
+CALCA wt Allele
+Transcriptional Activation
+Data Set
+Biomedical Monitors
+Anaplastic thyroid carcinoma
+Candidate Tumor Suppressor Gene
+Suppressed
+Microarray Analysis
+Base Sequence
+ESTERASE C
+Triggered by
+Melanoma Pathway
+Intrinsic drive
+Simian virus 40
+Presence (property)
+Tumor Progression
+Disease Progression
+Obtain
+Count of entities
+Intact
+pre-miRNA
+Unique
+Pivot
+Case (situation)
+Haiti
+Deregulation
+Hematopoietic
+Anatomical segmentation
+production
+alpha-hydroxyglutarate
+Standing position
+Alteration
+During
+roscovitine
+Amount type - Percentage
+RB1 gene
+Evidence
+Occur (action)
+Present
+Small cell carcinoma of lung
+Fulfill
+Computation (action)
+Activities
+K Prime
+Aggressive behavior
+Clinical action
+CCND1 protein, human
+Cells
+TET2 gene
+Surveys
+MCL1 gene
+Plasmids
+Nerve Tissue
+Intracellular
+Human cells
+License
+Type - attribute
+Neoplasms
+Synthesis
+Used by
+Level 5
+Inhibition
+Acute lymphocytic leukemia
+End-stage
+Macrophage Chemotactic Factors
+flow
+Agent
+Rate
+Isocitrate Dehydrogenase (NAD+)
+NCI CTEP SDC Retinoblastoma Sub-Category Terminology
+Reduplication
+Metastatic to
+neoplasm regression
+HeLa Cells
+Guanosine Triphosphate Phosphohydrolases
+Levels (qualifier value)
+Ectoderm
+Exhibits as Topic
+Clinical
+Angiogenic Process
+Carcinogenesis
+Cautionary Warning
+Prominent
+Target
+Repression, Psychology
+tumor growth
+Excitation
+Involvement with
+neuronal
+Four
+Appearance
+PLK1 gene
+Cancer Genus
+Cervical Squamous Cell Carcinoma
+MAP kinase activity
+Very
+All
+New
+inhibitors
+Providing (action)
+Breast Carcinoma
+In Vitro Route of Administration
+Generalized
+Precursor
+Negative Regulation of Apoptosis
+Adult T-Cell Lymphoma/Leukemia
+Response level
+Factor
+WAS gene
+ancestors
+Tretinoin
+Exertion
+20%
+Lineage
+Three
+Phenotype
+Protein Overexpression
+And
+Changing
+Regulatory Report
+Approach
+Formal Expression
+Mutation
+Hippocampus Proper
+Genotoxic Stress
+Including (qualifier)
+Double Value Type
+Precipitating Factors
+Function
+Publishing
+Suppressor
+Myelopoiesis
+Entity Name Part Type - given
+High
+Human Development
+Antimicrobial susceptibility
+Stress
+Loading Technique
+Series
+Major
+Animals
+MicroRNAs
+Tumor Suppressor Genes
+Only - dosing instruction fragment
+Molecular Profiling
+Tumor cells, malignant
+EVI5 gene
+Human gene
+strategy
+Main
+necroptotic process
+Anabolism
+NIH 3T3 Cells
+RIPK3 gene
+Adoptive Immunotherapy
+Loss of Heterozygosity
+Characterization
+Etiology aspects
+chemical cofactor
+Then
+bortezomib
+Destination site
+protein expression
+Caco-2 Cells
+Very Important
+Interphase
+EGFR protein, human
+Zebrafish
+Gastric (qualifier value)
+Tumorigenicity
+Biospecimen Events Domain
+Two
+Nucleotide Biosynthesis
+SDS-PAGE
+RALBP1 wt Allele
+kinase activity
+Phenomenon
+Embryonic Stem Cells
+Limited (extensiveness)
+Blast (physical force)
+Growth
+Variability
+Infectious disease of lung
+Has property
+Lung Neoplasms
+Solid
+Open
+mesenchymal
+Andorra
+Long-Acting Thyroid Stimulator
+IDH1 Gene Mutation
+Downstream
+Nature
+Negative Regulation of G1 Phase
+Developmental regression
+Modulated
+Gene Expression Regulation
+CDISC Events Class
+Observation Method - algorithm
+RASA4 gene
+Cell Cycle Arrest
+Tumor Suppressor Proteins
+Gene Mutant
+Other
+Collection (action)
+Green Fluorescent Proteins
+Relapse
+Preliminary
+Tumor tissue sample
+Feedback - evaluative response process
+CDK5RAP2 gene
+Personal appearance
+Screen Device Component
+Hypothesis
+Disease Response
+Research Personnel
+Efficiency
+Chemical or Textual Reference to Actual Test or Parameter
+To
+Expected
+Colombia
+Gene Expression
+Activation action
+Monomeric GTP-Binding Proteins
+Event Qualification - Dependency
+Decrease
+MPRIP wt Allele
+Absence (morphologic abnormality)
+Microtubules
+Long
+Erythropoiesis
+disrupted
+Downward
+Genomic Library
+Bone plates
+Family member
+Relevance
+DNA Sequence Rearrangement
+This (eukaryote)
+Endodermal
+Loop
+Treated with
+Interested
+Due to
+Regardless
+Part of
+Regulation
+*Susceptibility
+MAP3K7 gene
+study of epigenetics
+ARHGEF2 wt Allele
+Out (direction)
+Metabolite
+Important
+Promotion (action)
+LATS2 gene
+Blood Product Processing Requirements - Irradiated
+telomerase activity
+Induce (action)
+Classification
+Work
+American Type Culture Collection
+BCL2 gene
+Quantitative Reverse Transcriptase PCR
+Therapeutic brand of coal tar
+MIR21 gene
+Carboxyl Group
+Short Hairpin RNA
+Ukraine
+Definition
+Entry (data)
+Homo sapiens
+Local
+Metabolism
+Caspase Inhibitors
+ENZYMES FOR TREATMENT OF WOUNDS AND ULCERS
+Immortalization
+Lanugo
+Telomerase RNA Component
+Liver carcinoma
+N not otherwise specified Antibody
+Bilateral
+Self
+Gene Regulatory Networks
+INPP4B gene
+Contain (action)
+emergent
+Logic
+Breast Cancer Cell
+Lost
+Loss
+Epithelial Cells
+Identification (Psychology)
+Leukemia, Myelocytic, Acute
+Characteristics
+Breast
+Container status - Identified
+Few
+nucleotide binding
+MIR223 wt Allele
+MCF-7 Cells
+CDKN2A gene
+consider
+potential
+described
+STK33 gene
+Add - instruction imperative
+Enzymes
+Availability of
+Granulocyte differentiation
+MDM2 gene
+DNA Library
+Associated with
+Age of Onset
+Accurate (qualifier)
+Investigational
+Affect (mental function)
+acute
+Octamer Transcription Factor-3
+ras Proteins
+Amines
+Generic Role
+Genes
+Open Reading Frames
+Mammalian Cell
+BCL2L1 gene
+Recent
+IkappaB kinase activity
+IDH1 gene
+Reproductive function
+Neuroepithelial, Perineurial, and Schwann Cell Neoplasm
+Cyclin-Dependent Kinases
+Growth arrest
+Chemical Probe
+Rodent
+G2 to M Transition Process
+Trunk of lateral basal segmental artery
+Data Transformation
+Stimulus
+Eukaryotic Cells
+TEL-AML1 fusion protein
+Therapeutic
+Data
+Increase
+Able to balance
+% bound (qualifier value)
+Probable Methylcytosine Dioxygenase TET2
+Pb2+
+90%
+CDKN2A wt Allele
+ribonucleotide biosynthetic process
+Formation
+Contribution
+Similarity
+CALCIUM SUPPLEMENTS
+Myeloid
+Laboratory
+Metastatic Neoplasm
+Changed status
+Ionizing radiation
+metaplastic cell transformation
+internal-external locus of control scale
+promoter
+Carcinoma of lung
+expression vector
+Oncogenes
+Living Alone
+Adrenergic and dopaminergic agents combinations
+DNA hypermethylation
+Argentaffin Cell
+Receptors, Death Domain
+Oxidative
+FOXD3 gene
+Light Emitting Diode Device Component
+consideration
+GATA2 Transcription Factor
+Anatomical maturation
+Digital Model Attachment
+Correlation
+Instance
+Increasing
+Homologous Gene
+Enhance (action)
+Covered (qualifier value)
+AS gene
+Reduced
+/hour
+Comparison
+inhibited
+Thinking, function
+Transcript
+Give - dosing instruction imperative
+Blocking
+First (number)
+Rapid
+Stimulation (motivation)
+Half
+Blast Cell Proliferation
+Lymphoid
+Cell Cycle
+Entire lung
+Strikes, Employee
+Place
+Papillary thyroid carcinoma
+Detected (finding)
+Viral
+Branch of
+promise
+Base - General Qualifier
+Entire head
+AURKA gene
+Hematopoiesis
+Version
+Fibroblasts
+Biologic Development
+Molecular Target
+Physiology
+List
+Simultaneous
+Neoplastic Cell Transformation
+DND1 gene
+Same
+Representation (action)
+Arrested progression
+Interaction
+PC9
+Embryonal Carcinoma Stem Cells
+NCI CTEP SDC Non-Small Cell Lung Cancer Sub-Category Terminology
+Maintenance
+SOX2 Transcription Factor
+Family Pittidae
+MLL protein, human
+Phosphorylation Site
+Cell Differentiation process
+Sepsis
+Early
+Lesion
+Neoplastic
+Use of
+Phosphorylation
+Six
+research data
+fasudil
+Tacrolimus Binding Proteins
+liking
+MIR145 gene
+Increment
+primary tumor
+Proliferation
+CEL gene
+Lymphoma
+Testicular Germ Cell Tumor
+Linear
+Mitotic
+Retained
+CASP8 gene
+RIPK1 gene
+Good
+Localized
+SOX11 Transcription Factor
+Nearly
+Number of birth
+TNF protein, human
+Conditional
+Cyclin-Dependent Kinase Inhibitor Agents
+MAP kinase kinase kinase activity
+Different
+Epigenetic Process
+Empty (qualifier)
+Example
+Patterns
+Malignant neoplasm of ovary
+Correct (qualifier)
+Adenomatous Polyposis Coli
+CCNE1 gene
+Biopolymer Sequencing
+Concept Status - Proposed
+Set (Psychology)
+Stem of Organ
+Trunk of medial basal segmental artery
+Requirement
+Room of building - Study
+Carrying
+Uncontrolled
+Revealed
+Control function
+Reported Term
+Negation
+Chromatin Structure
+Gap (space)
+ras Oncogene
+Carcinogens
+Pluripotent Stem Cells
+Certain (qualifier value)
+E2F1 protein, human
+stages of change
+Introduces
+negative regulation of ligase activity
+Together
+Possible
+suggestion
++2
+cumulative gene
+Acute Myeloid Leukemia Pathway
+Abundance
+Specification
+Malignant neoplasm of prostate
+Cell Cycle Progression
+Conventional (Clear Cell) Renal Cell Carcinoma
+Apoptosis
+Does play
+leukemia
+Probably
+Exclusive
+Colon Carcinoma
+Microarray
+Drug resistance
+Essential
+Pancreatic Ductal Adenocarcinoma
+Proteins
+Aurora Kinase A
+derivatives
+Chronic Lymphocytic Leukemia
+Cardiac Lead Procedure
+AS virus
+Eukaryota
+El Salvador
+Primary
+Catalysis
+EPOR gene
+Lesotho
+Wild Type
+Occupied
+Surgical construction
+Hyperploidy
+Embryonal Carcinoma
+Cell Cycle Checkpoints
+prediction
+SOX17 wt Allele
+Before
+Regulator
+Lethal
+Fold in Medical Device Material
+Candidate Disease Gene
+Increased
+(City) Block
+Cytotoxic Chemotherapy
+IDH1 wt Allele
+Extracellular Matrix
+Cell Survival
+House mice
+Switch Device Component
+Immediate
+Isolated cases
+Electroporation
+granulocyte
+Anaplastic Oligodendroglioma
+anaphase-promoting complex
+Malignant neoplasm of stomach
+Chromosome Aberrations
+Construct
+Scientific Study
+Murine
+Tumor regression
+Extensive
+Overall
+Cell Proliferation
+RAF Proto-Oncogene Serine/Threonine-Protein Kinase, human
+depend
+Related personal status
+LINC01194 gene
+Leukemic Cells Measurement
+Needs
+cell growth
+Frequent
+Ubiquitination
+Proteolysis
+Examined
+Stage
+Clone Cells
+use studies
+insulin receptor substrate 1 protein
+Singular
+mesodermal
+Non-Small Cell Lung Carcinoma
+Mutual
+In addition to
+epithelial to mesenchymal transition
+Effect
+Proteasome Pathway
+mutant
+Fighting
+One
+Observed
+Common (qualifier value)
+seen
+Deletion (action)
+BBS9 wt Allele
+TERT wt Allele
+preference strength
+Myeloid Cell Differentiation
+Centrosome
+programmed necrotic cell death
+EPHB2 protein, human
+Sufficient
+receptor activity
+Carbon
+Diet Code Specification Type - Preference
+Effective
+Positive
+Direct (qualifier)
+Reagents
+Mediate
+Resulting in
+Immature
+in vitro study
+Process
+HOPX gene
+cell type
+Retinoblastoma Protein
+Intellectual scale
+Embryoid Bodies
+Programs
+GTPase-Activating Proteins
+Cell division
+epithelial
+Epithelium
+Proliferation (morphologic abnormality)
+Body tissue
+Staphylococcal Protein A
+VARIOUS DRUG CLASSES IN ATC
+Host defense
+research results
+Screening for cancer
+Cervix carcinoma
+Confirmation
+Anaphase
+Ubiquitin
+Cultured Cell Line
+Choose (action)
+Point A
+Aberrant
+solid tumor
+Time
+Responsible to
+Medical Device Material Degradation
+Report (document)
+Device Component System
+Primitive
+Investigates
+Influentials
+Malignant tumor of cervix
+Impaired
+in vivo
+No effect
+Entity Determiner - specific
+Resistance (Psychotherapeutic)
+Late
+Dose-dependent
+NDEL1 gene
+Enzymatic Activity [MoA]
+cell transformation
+Transoral Laser Microsurgery
+Tumor cells, uncertain whether benign or malignant
+Inhibitor
+Binding (Molecular Function)
+compromise
+negative regulation of cyclin-dependent protein serine/threonine kinase by cyclin degradation
+Cells, Cultured [Chemical/Ingredient]
+biological signaling
+KRAS NP_004976.2:p.G12D
+Early stage
+Nucleotides
+Thyroid carcinoma
+MEIS1 gene
+Account number:Identifier:Point in time:^Patient:Nominal
+Further
+RNA Interference
+Specific qualifier value
+Culture Media
+Capacity
+Transcription, Genetic
+tetanus toxoid helper peptide
+Guanosine Triphosphate
+R Factors
+LOX gene
+*Activity (kind of quantity)
+Support, device
+Comprehension
+Guanine Nucleotide Exchange Factors
+Stabilized (qualifier value)
+Show
+Others - Allergy
+Malignant neoplasm of pancreas
+Companions
+Mitosis
+IDH2 Gene Mutation
+Large
+Genetic
+CIB1 gene
+Expression (foundation metadata concept)
+Act Relationship Subset - previous
+Complex
+Necrosis
+More
+IL1A protein, human
+Either
+Mechanism (attribute)
+Killing
+TNF receptor-associated factor 6
+3+ Answer to Question
+Abnormally high
+Mean Percent of Normal
+Following
+Myeloid Leukemia
+Known
+Model
+Adenocarcinoma of lung (disorder)
+caspase activity
+Old age
+Tumor-Derived
+Excretory function
+Pluripotent
+Phosphotransferases
+cervical cells
+Exogenous
+Anchorage-Independent Growth
+Advance
+ABT-737
+described group
+commitment
+Belarus
+Ablation
+Patients
+Mitotic Telophase
+Active
+establishment and maintenance of localization
+IRS1 gene
+Stem cells
+Preposition For
+Extent
+Crassa
+Science
+Protein Component
+regulation of ribosome biogenesis
+Rest
+Since
+Virus Diseases
+Niger
+Homologous Sequences
+Geographic state
+Clinical Trial Final Report
+Content Type Requirement
+Drug Discovery
+Intravascular line
+Experimental Result
+Fused structure
+Genome
+Mitogen-Activated Protein Kinase 3

@@ -121,23 +121,11 @@ public class Test {
 
     }
     public static  void evaluateOurMethods(DoubleVector groundTruthMean) throws IOException {
-        DoubleVector paragraphVector = readCorrelationFiles("correlationResult/ourResults/paragraphvector.txt");
-        double correlation = calculateCorrelation(paragraphVector, groundTruthMean);
-        System.out.println("Correlation result between OUR METHOD-(PARAGRAPH VECTOR) and GROUNDTRUTH is: " + correlation);
-
-        DoubleVector lsa = readCorrelationFiles("correlationResult/ourResults/lsa.txt");
-        correlation = calculateCorrelation(lsa, groundTruthMean);
-        System.out.println("Correlation result between OUR METHOD-(LSA) and GROUNDTRUTH is: " + correlation);
-
-
-        DoubleVector baselineCombination = readCorrelationFiles("correlationResult/ourResults/baselineCombination.txt");
-        correlation = calculateCorrelation(baselineCombination, groundTruthMean);
-        System.out.println("Correlation result between OUR METHOD-(ONLY BASELINE) and GROUNDTRUTH is: " + correlation);
 
         System.out.println("\n************************************************************************\n");
 
         DoubleVector onlyWordnet = readCorrelationFiles("correlationResult/ourResults/onlyWordnet/pathWordnet.txt");
-        correlation = calculateCorrelation(onlyWordnet, groundTruthMean);
+        double correlation = calculateCorrelation(onlyWordnet, groundTruthMean);
         System.out.println("Correlation result between OUR METHOD-(ONLY WORDNET - PATH) and GROUNDTRUTH is: " + correlation);
 
         DoubleVector resnik = readCorrelationFiles("correlationResult/ourResults/onlyWordnet/resnikWordNet.txt");
@@ -152,7 +140,6 @@ public class Test {
         DoubleVector lesk = readCorrelationFiles("correlationResult/ourResults/onlyWordnet/lesk.txt");
         correlation = calculateCorrelation(lesk, groundTruthMean);
         System.out.println("Correlation result between OUR METHOD-(ONLY WORDNET - LESK) and GROUNDTRUTH is: " + correlation);
-
 
 
         DoubleVector wuPalmer = readCorrelationFiles("correlationResult/ourResults/onlyWordnet/wuPalmer.txt");
@@ -178,9 +165,33 @@ public class Test {
         correlation = calculateCorrelation(vectorPairs, groundTruthMean);
         System.out.println("Correlation result between OUR METHOD-(ONLY WORDNET -  VECTOR-PAIRS) and GROUNDTRUTH is: " + correlation);
 
-//        DoubleVector test = readCorrelationFiles("correlationResult/ourResults/onlyWordnet/test.txt");
-//        correlation = calculateCorrelation(test, groundTruthMean);
-//        System.out.println("Correlation result between OUR METHOD-(ONLY TEST) and GROUNDTRUTH is: " + correlation);
+
+        DoubleVector wordnetUsingMetamap = readCorrelationFiles("correlationResult/ourResults/onlyWordnet/wordnetUsingMetamap.txt");
+        correlation = calculateCorrelation(wordnetUsingMetamap, groundTruthMean);
+        System.out.println("Correlation result between OUR METHOD-(ONLY WORDNET -  WORDNET-USING METAMAP) and GROUNDTRUTH is: " + correlation);
+
+        DoubleVector test = readCorrelationFiles("correlationResult/ourResults/onlyWordnet/test.txt");
+        correlation = calculateCorrelation(test, groundTruthMean);
+        System.out.println("Correlation result between OUR METHOD-(ONLY TEST) and GROUNDTRUTH is: " + correlation);
+
+        System.out.println("\n************************************************************************\n");
+
+        DoubleVector paragraphVector = readCorrelationFiles("correlationResult/ourResults/paragraphvector.txt");
+        correlation = calculateCorrelation(paragraphVector, groundTruthMean);
+        System.out.println("Correlation result between OUR METHOD-(PARAGRAPH VECTOR) and GROUNDTRUTH is: " + correlation);
+
+        DoubleVector lsa = readCorrelationFiles("correlationResult/ourResults/lsa.txt");
+        correlation = calculateCorrelation(lsa, groundTruthMean);
+        System.out.println("Correlation result between OUR METHOD-(LSA) and GROUNDTRUTH is: " + correlation);
+
+
+        DoubleVector baselineCombination = readCorrelationFiles("correlationResult/ourResults/baselineCombination.txt");
+        correlation = calculateCorrelation(baselineCombination, groundTruthMean);
+        System.out.println("Correlation result between OUR METHOD-(ONLY BASELINE) and GROUNDTRUTH is: " + correlation);
+
+        DoubleVector onlyUmls_SnometCt = readCorrelationFiles("correlationResult/ourResults/onlyUmls_SnomedCt.txt");
+        correlation = calculateCorrelation(onlyUmls_SnometCt, groundTruthMean);
+        System.out.println("Correlation result between OUR METHOD-(ONLY UMLS (SNOMED-CT-PATH)) and GROUNDTRUTH is: " + correlation);
 
         System.out.println("\n************************************************************************\n");
 
@@ -189,10 +200,11 @@ public class Test {
     public static void main(String[] args) throws SLIB_Exception, IOException {
 
         DoubleVector groundTruthMean = readCorrelationFiles("correlationResult/groundTruth/MEAN.txt");
-        evaluateBaselineResults(groundTruthMean);
+        DoubleVector biomedicalAnnotator = readCorrelationFiles("correlationResult/groundTruth/annotatorD.txt");
+        evaluateBaselineResults(biomedicalAnnotator);
         // evaluateEachAnnotatorCorrelations(groundTruthMean);
-        evaluateStateOfTheArtSystems(groundTruthMean);
-        evaluateOurMethods(groundTruthMean);
+        evaluateStateOfTheArtSystems(biomedicalAnnotator);
+        evaluateOurMethods(biomedicalAnnotator);
 
     }
 }

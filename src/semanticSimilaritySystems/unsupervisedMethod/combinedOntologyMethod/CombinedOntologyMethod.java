@@ -1,5 +1,6 @@
 package semanticSimilaritySystems.unsupervisedMethod.combinedOntologyMethod;
 import org.openrdf.query.algebra.Str;
+import semanticSimilaritySystems.core.Pair;
 import semanticSimilaritySystems.core.Sentence;
 import semanticSimilaritySystems.core.SimilarityMeasure;
 import semanticSimilaritySystems.core.Word;
@@ -127,6 +128,40 @@ public class CombinedOntologyMethod implements SimilarityMeasure{
 
         return fillSentenceWithMetamapResults(results);
     }
+
+    public HashSet<String> filHash(Sentence sentence, HashSet<String> hash){
+        for(Word s: sentence.getWords()){
+            if(s.isInUmls() && !hash.contains(s.getWord())){
+                hash.add(s.getWord());
+            }
+
+        }
+
+        return hash;
+    }
+
+    public void writeAllUmlsTerms(String fileName, List<Pair> pairs) throws IOException {
+        BufferedWriter buffer = new BufferedWriter(new FileWriter(new File(fileName)));
+        String line;HashSet<String> umlsTerms = new HashSet<String>();
+int index = 1;
+        for(Pair currentPair: pairs){
+           Sentence sentence1 = getMetamapResult(currentPair.getSentence1());
+           Sentence sentence2 =  getMetamapResult(currentPair.getSentence2());
+
+            filHash(sentence1, umlsTerms);
+            filHash(sentence2, umlsTerms);
+            System.out.print(index + ". pair done!");
+
+        }
+
+        for(String s:umlsTerms){
+            buffer.write(s);
+            buffer.newLine();
+        }
+
+        buffer.close();
+    }
+
     public double calculateOnlyWordnetScores(String word1, String word2){
         double similarityScore = 0.0;
         word1 = replacePunctuations(word1);
@@ -278,7 +313,6 @@ public class CombinedOntologyMethod implements SimilarityMeasure{
 //
 //        Sentence mappedSentence1 =returnSentence(sentence1);
 //        Sentence mappedSentence2 = returnSentence(sentence2);
-//
 
         HashSet<Word> dictionary  = constructDictionary(mappedSentence1, mappedSentence2);
 

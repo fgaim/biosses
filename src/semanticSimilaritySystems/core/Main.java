@@ -42,10 +42,10 @@ public class Main {
 
         /****************************BASELINE**********************************************/
         SimilarityMeasure measure = new BaselineMethod(constructDictionary(pairList));
-        //  for(Pair currentPair: pairList){
-        //  double similarityScore =measure.getSimilarity(currentPair.getSentence1(), currentPair.getSentence2());
-        // System.out.println(similarityScore);
-        // }
+//          for(Pair currentPair: pairList){
+//          double similarityScore =measure.getSimilarity(currentPair.getSentence1(), currentPair.getSentence2());
+//         System.out.println(similarityScore);
+//         }
 
         /**********************************************************************************/
 
@@ -85,13 +85,14 @@ public class Main {
 
         /**************************************COMBINED METHOD**************************************/
 
-        measure = new CombinedOntologyMethod();
-        for(Pair currentPair: pairList){
-            double similarityScore =measure.getSimilarity(currentPair.getSentence1(), currentPair.getSentence2());
-            System.out.println(similarityScore);
-            //break;
-        }
-        /**********************************************************************************/
+        CombinedOntologyMethod measure1 = new CombinedOntologyMethod();
+        measure1.writeAllUmlsTerms("umlsTerms.txt", pairList);
+//        for(Pair currentPair: pairList){
+//            double similarityScore =measure.getSimilarity(currentPair.getSentence1(), currentPair.getSentence2());
+//            System.out.println(similarityScore);
+//            //break;
+//        }
+//        /**********************************************************************************/
 
     }
 
