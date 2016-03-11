@@ -1,7 +1,9 @@
 package test;
 
 import com.google.common.io.Resources;
+import edu.ucla.sspace.similarity.KendallsTau;
 import edu.ucla.sspace.similarity.PearsonCorrelation;
+import edu.ucla.sspace.similarity.SpearmanRankCorrelation;
 import edu.ucla.sspace.vector.DenseVector;
 import edu.ucla.sspace.vector.DoubleVector;
 import slib.utils.ex.SLIB_Exception;
@@ -17,6 +19,8 @@ import java.io.IOException;
 public class Test {
 
     public static double calculateCorrelation(final DoubleVector xArray, final DoubleVector yArray) throws IllegalArgumentException {
+        SpearmanRankCorrelation spearmanCorr = new SpearmanRankCorrelation();
+        //KendallsTau kendalCor = new KendallsTau();
         PearsonCorrelation pearsonCorr = new PearsonCorrelation();
         double result = pearsonCorr.sim(xArray,yArray);
 
@@ -155,20 +159,19 @@ public class Test {
         correlation = calculateCorrelation(leacockChodorow, groundTruthMean);
         System.out.println("Correlation result between OUR METHOD-(ONLY WORDNET - LEACOCKCHODOROW) and GROUNDTRUTH is: " + correlation);
 
+//        DoubleVector hirstStOnge = readCorrelationFiles("correlationResult/ourResults/onlyWordnet/hirstStOnge.txt");
+//        correlation = calculateCorrelation(hirstStOnge, groundTruthMean);
+//        System.out.println("Correlation result between OUR METHOD-(ONLY WORDNET - HIRSTONGE) and GROUNDTRUTH is: " + correlation);
+
 
         DoubleVector vector = readCorrelationFiles("correlationResult/ourResults/onlyWordnet/vector.txt");
         correlation = calculateCorrelation(vector, groundTruthMean);
         System.out.println("Correlation result between OUR METHOD-(ONLY WORDNET - VECTOR) and GROUNDTRUTH is: " + correlation);
 
 
-        DoubleVector vectorPairs = readCorrelationFiles("correlationResult/ourResults/onlyWordnet/vectorPairs.txt");
-        correlation = calculateCorrelation(vectorPairs, groundTruthMean);
-        System.out.println("Correlation result between OUR METHOD-(ONLY WORDNET -  VECTOR-PAIRS) and GROUNDTRUTH is: " + correlation);
-
-
         DoubleVector wordnetUsingMetamap = readCorrelationFiles("correlationResult/ourResults/onlyWordnet/wordnetUsingMetamap.txt");
         correlation = calculateCorrelation(wordnetUsingMetamap, groundTruthMean);
-        System.out.println("Correlation result between OUR METHOD-(ONLY WORDNET -  WORDNET-USING METAMAP) and GROUNDTRUTH is: " + correlation);
+        System.out.println("Correlation result between OUR METHOD-(ONLY WORDNET -  BASELINE-USING METAMAP) and GROUNDTRUTH is: " + correlation);
 
         DoubleVector test = readCorrelationFiles("correlationResult/ourResults/onlyWordnet/test.txt");
         correlation = calculateCorrelation(test, groundTruthMean);
@@ -184,14 +187,17 @@ public class Test {
         correlation = calculateCorrelation(lsa, groundTruthMean);
         System.out.println("Correlation result between OUR METHOD-(LSA) and GROUNDTRUTH is: " + correlation);
 
-
-        DoubleVector baselineCombination = readCorrelationFiles("correlationResult/ourResults/baselineCombination.txt");
-        correlation = calculateCorrelation(baselineCombination, groundTruthMean);
-        System.out.println("Correlation result between OUR METHOD-(ONLY BASELINE) and GROUNDTRUTH is: " + correlation);
+//        DoubleVector baselineCombination = readCorrelationFiles("correlationResult/ourResults/baselineCombination.txt");
+//        correlation = calculateCorrelation(baselineCombination, groundTruthMean);
+//        System.out.println("Correlation result between OUR METHOD-(ONLY BASELINE) and GROUNDTRUTH is: " + correlation);
 
         DoubleVector onlyUmls_SnometCt = readCorrelationFiles("correlationResult/ourResults/onlyUmls_SnomedCt.txt");
         correlation = calculateCorrelation(onlyUmls_SnometCt, groundTruthMean);
         System.out.println("Correlation result between OUR METHOD-(ONLY UMLS (SNOMED-CT-PATH)) and GROUNDTRUTH is: " + correlation);
+
+        DoubleVector umlsRelatedness = readCorrelationFiles("correlationResult/ourResults/umlsRelatedness.txt");
+        correlation = calculateCorrelation(umlsRelatedness, groundTruthMean);
+        System.out.println("Correlation result between OUR METHOD-(ONLY UMLS (UMLS RELATEDNESS - VECTOR)) and GROUNDTRUTH is: " + correlation);
 
         System.out.println("\n************************************************************************\n");
 

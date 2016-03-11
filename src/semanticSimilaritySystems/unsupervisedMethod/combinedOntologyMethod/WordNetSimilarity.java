@@ -30,7 +30,7 @@ public class WordNetSimilarity implements SimilarityMeasure {
         ILexicalDatabase db = new NictWordNet();
         WS4JConfiguration.getInstance().setMFS(true);
 
-        RelatednessCalculator rc = new VectorPairs(db);
+        RelatednessCalculator rc = new HirstStOnge(db);
         List<POS[]> posPairs = rc.getPOSPairs();
         double maxScore = -1D;
 

@@ -162,17 +162,17 @@ int index = 1;
         buffer.close();
     }
 
-    public double calculateOnlyWordnetScores(String word1, String word2){
+    public double calculateOnlyWordnetScores(Word word1, Word word2){
         double similarityScore = 0.0;
-        word1 = replacePunctuations(word1);
-        word2 = replacePunctuations(word2);
-        if(word1.equals(word2))
+        String txt1 = replacePunctuations(word1.getWord());
+        String txt2 = replacePunctuations(word2.getWord());
+        if(txt1.equals(txt2))
             return 1.0;
 
-//        WordNetSimilarity wordNet_similarity_measure = new WordNetSimilarity();
-//        double wordNet_similarity_score = wordNet_similarity_measure.getSimilarity(word1, word2);
-//        if (wordNet_similarity_score != -1)
-//            similarityScore = wordNet_similarity_score;
+        WordNetSimilarity wordNet_similarity_measure = new WordNetSimilarity();
+        double wordNet_similarity_score = wordNet_similarity_measure.getSimilarity(txt1, txt2);
+        if (wordNet_similarity_score != -1)
+            similarityScore = wordNet_similarity_score;
 
         return similarityScore;
     }
@@ -194,6 +194,7 @@ int index = 1;
                 UmlsSimilarity umls_similarity_measure = new UmlsSimilarity();
                 double umls_similarity_score = umls_similarity_measure.getSimilarity(word1.getWord(), word2.getWord());
 
+                similarityScore = umls_similarity_score;
                 if (umls_similarity_score > 0)
                     similarityScore = umls_similarity_score;
 

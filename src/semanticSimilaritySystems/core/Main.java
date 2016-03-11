@@ -85,13 +85,13 @@ public class Main {
 
         /**************************************COMBINED METHOD**************************************/
 
-        CombinedOntologyMethod measure1 = new CombinedOntologyMethod();
-        measure1.writeAllUmlsTerms("umlsTerms.txt", pairList);
-//        for(Pair currentPair: pairList){
-//            double similarityScore =measure.getSimilarity(currentPair.getSentence1(), currentPair.getSentence2());
-//            System.out.println(similarityScore);
-//            //break;
-//        }
+        measure = new CombinedOntologyMethod();
+   //     measure1.writeAllUmlsTerms("umlsTerms.txt", pairList);
+        for(Pair currentPair: pairList){
+            double similarityScore =measure.getSimilarity(currentPair.getSentence1(), currentPair.getSentence2());
+            System.out.println(similarityScore);
+            //break;
+        }
 //        /**********************************************************************************/
 
     }
