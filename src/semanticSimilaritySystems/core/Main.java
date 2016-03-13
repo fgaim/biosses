@@ -52,7 +52,7 @@ public class Main {
 
         /****************************SIMMETRICS***************************************************/
 
-        measure = new SimMetricFunctions();
+//        measure = new SimMetricFunctions();
 //        for(Pair currentPair: pairList){
 //              double similarityScore =measure.getSimilarity(currentPair.getSentence1(), currentPair.getSentence2());
 //             System.out.println(similarityScore);
@@ -73,25 +73,24 @@ public class Main {
         /**********************************************************************************/
 
 
-
         /***********************************LSA********************************************/
 
         measure = new LsaDocumentSimilarity();
-//        for(Pair currentPair: pairList){
-//           // double similarityScore =measure.getSimilarity(currentPair.getSentence1(), currentPair.getSentence2());
-//           // System.out.println(similarityScore);
-//        }
+        for(Pair currentPair: pairList){
+            double similarityScore =measure.getSimilarity(currentPair.getSentence1(), currentPair.getSentence2());
+            System.out.println(similarityScore);
+        }
         /**********************************************************************************/
 
         /**************************************COMBINED METHOD**************************************/
 
-        measure = new CombinedOntologyMethod();
+       measure = new CombinedOntologyMethod();
    //     measure1.writeAllUmlsTerms("umlsTerms.txt", pairList);
-        for(Pair currentPair: pairList){
-            double similarityScore =measure.getSimilarity(currentPair.getSentence1(), currentPair.getSentence2());
-            System.out.println(similarityScore);
-            //break;
-        }
+//        for(Pair currentPair: pairList){
+//            double similarityScore =measure.getSimilarity(currentPair.getSentence1(), currentPair.getSentence2());
+//            System.out.println(similarityScore);
+//            //break;
+//        }
 //        /**********************************************************************************/
 
     }

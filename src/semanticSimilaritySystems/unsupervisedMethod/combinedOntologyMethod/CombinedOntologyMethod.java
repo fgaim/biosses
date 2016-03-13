@@ -48,6 +48,7 @@ public class CombinedOntologyMethod implements SimilarityMeasure{
         boolean metamapping = false;
         boolean newPhrase = false;
         String[] split = results.split("\n");
+        //System.out.println(results);
         String preTerm="";
         int wordIndex = 0;
         for(String s: split){
@@ -55,7 +56,7 @@ public class CombinedOntologyMethod implements SimilarityMeasure{
                 if(s.contains("Phrase:") ){
                     //SAVE PREVIOUS ONE
                     if(newPhrase && !metamapping) {
-                   //     System.out.println("Not umls word: " + preTerm);
+                        //System.out.println("Not umls word: " + preTerm);
                         preTerm = replacePunctuations(preTerm);
                         if(!preTerm.equals("")) {
                             Word word = new Word();
@@ -100,7 +101,7 @@ public class CombinedOntologyMethod implements SimilarityMeasure{
                         newWord.setWord(s);
                         mappedSentence.getWords().add(wordIndex, newWord);
                         mappedSentence.getStringWords().add(wordIndex, newWord.getWord());
-                       // System.out.println(s);
+                        //System.out.println("UMLS TERM: " +s);
 
                     }
 
@@ -168,12 +169,10 @@ int index = 1;
         String txt2 = replacePunctuations(word2.getWord());
         if(txt1.equals(txt2))
             return 1.0;
-
         WordNetSimilarity wordNet_similarity_measure = new WordNetSimilarity();
         double wordNet_similarity_score = wordNet_similarity_measure.getSimilarity(txt1, txt2);
         if (wordNet_similarity_score != -1)
             similarityScore = wordNet_similarity_score;
-
         return similarityScore;
     }
 
@@ -183,8 +182,8 @@ int index = 1;
     }
 
     public double calculateOnlyUmlsScores(Word word1, Word word2) throws SLIB_Exception, IOException {
-         double similarityScore = 0.0;
 
+        double similarityScore = 0.0;
         if (word1.getWord().equalsIgnoreCase(word2.getWord())) {
             similarityScore = 1;
         }

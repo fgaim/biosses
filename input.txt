@@ -1,1 +1,1 @@
-APC-dependent degradation of cyclin D1 does not require threonine 286 phosphorylation, but the presence of a cyclin degradation box, however, as observed in the present study, threonine 286 phosphorylation is essential for proteolytic degradation of cyclin D1 in skin
+Recent work in model systems and acute myelogenous leukemia has suggested that expression of MCL-1 is a key determinant of resistance to ABT-737

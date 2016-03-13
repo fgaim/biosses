@@ -120,8 +120,8 @@ public class LsaDocumentSimilarity implements SimilarityMeasure {
 
     public static void createDocumentForSentences(String sentence1, String sentence2, String filePathForSentence1, String filePathForSentence2) throws IOException {
 
-        BufferedWriter bufferForSentence1 = new BufferedWriter(new FileWriter(new File(filePathForSentence1)));
-        BufferedWriter bufferForSentence2 = new BufferedWriter(new FileWriter(new File(filePathForSentence2)));
+        BufferedWriter bufferForSentence1 = new BufferedWriter(new FileWriter(Resources.getResource(filePathForSentence1).getFile()));
+        BufferedWriter bufferForSentence2 = new BufferedWriter(new FileWriter(new File(Resources.getResource(filePathForSentence2).getFile())));
 
         bufferForSentence1.write(preprocess(sentence1));
         bufferForSentence2.write(preprocess(sentence2));
@@ -133,13 +133,13 @@ public class LsaDocumentSimilarity implements SimilarityMeasure {
 
     public double getSimilarity(String sentence1, String sentence2) throws IOException {
 
-        String filePathForSentence1 = "LSAModel/document1.txt";
-        String filePathForSentence2 = "LSAModel/document2.txt";
+        String filePathForSentence1 = "lsaModel/document1.txt";
+        String filePathForSentence2 = "lsaModel/document2.txt";
         createDocumentForSentences(sentence1,sentence2,filePathForSentence1,filePathForSentence2);
         String[] args=new String[3];
-        args[0] = "LSAModel/result.txt";
-        args[1] = filePathForSentence1;
-        args[2] = filePathForSentence2;
+        args[0] = "lsaModel/mylsa1.sspace";
+        args[1] = Resources.getResource(filePathForSentence1).getFile();
+        args[2] = Resources.getResource(filePathForSentence2).getFile();
         return documentVectorSimilarity(args);
 
     }

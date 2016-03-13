@@ -1,7 +1,6 @@
 package test;
 
 import com.google.common.io.Resources;
-import edu.ucla.sspace.similarity.KendallsTau;
 import edu.ucla.sspace.similarity.PearsonCorrelation;
 import edu.ucla.sspace.similarity.SpearmanRankCorrelation;
 import edu.ucla.sspace.vector.DenseVector;
@@ -128,6 +127,48 @@ public class Test {
 
         System.out.println("\n************************************************************************\n");
 
+
+        DoubleVector paragraphVector = readCorrelationFiles("correlationResult/ourResults/paragraphvector.txt");
+        double correlation = calculateCorrelation(paragraphVector, groundTruthMean);
+        System.out.println("Correlation result between OUR METHOD-(PARAGRAPH VECTOR) and GROUNDTRUTH is: " + correlation);
+
+        DoubleVector lsa = readCorrelationFiles("correlationResult/ourResults/lsa.txt");
+        correlation = calculateCorrelation(lsa, groundTruthMean);
+        System.out.println("Correlation result between OUR METHOD-(LSA) and GROUNDTRUTH is: " + correlation);
+
+//        DoubleVector baselineCombination = readCorrelationFiles("correlationResult/ourResults/baselineCombination.txt");
+//        correlation = calculateCorrelation(baselineCombination, groundTruthMean);
+//        System.out.println("Correlation result between OUR METHOD-(ONLY BASELINE) and GROUNDTRUTH is: " + correlation);
+
+
+        System.out.println("\n************************************************************************\n");
+
+        evaluateOurMethodsUsingWordNet(groundTruthMean);
+        evaluateOurMethodsUsingUmls(groundTruthMean);
+
+    }
+
+    public static void evaluateOurMethodsUsingUmls(DoubleVector groundTruthMean) throws IOException {
+        System.out.println("\n************************************************************************\n");
+        DoubleVector onlyUmls_SnometCt = readCorrelationFiles("correlationResult/ourResults/onlyUmls/onlyUmls_SnomedCt.txt");
+        double correlation = calculateCorrelation(onlyUmls_SnometCt, groundTruthMean);
+        System.out.println("Correlation result between OUR METHOD-(ONLY UMLS (SNOMED-CT-PATH)) and GROUNDTRUTH is: " + correlation);
+
+        DoubleVector umlsRelatedness = readCorrelationFiles("correlationResult/ourResults/onlyUmls/umlsRelatedness.txt");
+        correlation = calculateCorrelation(umlsRelatedness, groundTruthMean);
+        System.out.println("Correlation result between OUR METHOD-(ONLY UMLS (UMLS RELATEDNESS-ALL - VECTOR)) and GROUNDTRUTH is: " + correlation);
+
+        DoubleVector umlsRelatednessCUI = readCorrelationFiles("correlationResult/ourResults/onlyUmls/umlsRelatednessCUI.txt");
+        correlation = calculateCorrelation(umlsRelatednessCUI, groundTruthMean);
+        System.out.println("Correlation result between OUR METHOD-(ONLY UMLS (UMLS RELATEDNESS-CUI - LESK)) and GROUNDTRUTH is: " + correlation);
+
+
+        System.out.println("\n************************************************************************\n");
+
+    }
+    public static void evaluateOurMethodsUsingWordNet(DoubleVector groundTruthMean) throws IOException {
+        System.out.println("\n************************************************************************\n");
+
         DoubleVector onlyWordnet = readCorrelationFiles("correlationResult/ourResults/onlyWordnet/pathWordnet.txt");
         double correlation = calculateCorrelation(onlyWordnet, groundTruthMean);
         System.out.println("Correlation result between OUR METHOD-(ONLY WORDNET - PATH) and GROUNDTRUTH is: " + correlation);
@@ -179,30 +220,7 @@ public class Test {
 
         System.out.println("\n************************************************************************\n");
 
-        DoubleVector paragraphVector = readCorrelationFiles("correlationResult/ourResults/paragraphvector.txt");
-        correlation = calculateCorrelation(paragraphVector, groundTruthMean);
-        System.out.println("Correlation result between OUR METHOD-(PARAGRAPH VECTOR) and GROUNDTRUTH is: " + correlation);
-
-        DoubleVector lsa = readCorrelationFiles("correlationResult/ourResults/lsa.txt");
-        correlation = calculateCorrelation(lsa, groundTruthMean);
-        System.out.println("Correlation result between OUR METHOD-(LSA) and GROUNDTRUTH is: " + correlation);
-
-//        DoubleVector baselineCombination = readCorrelationFiles("correlationResult/ourResults/baselineCombination.txt");
-//        correlation = calculateCorrelation(baselineCombination, groundTruthMean);
-//        System.out.println("Correlation result between OUR METHOD-(ONLY BASELINE) and GROUNDTRUTH is: " + correlation);
-
-        DoubleVector onlyUmls_SnometCt = readCorrelationFiles("correlationResult/ourResults/onlyUmls_SnomedCt.txt");
-        correlation = calculateCorrelation(onlyUmls_SnometCt, groundTruthMean);
-        System.out.println("Correlation result between OUR METHOD-(ONLY UMLS (SNOMED-CT-PATH)) and GROUNDTRUTH is: " + correlation);
-
-        DoubleVector umlsRelatedness = readCorrelationFiles("correlationResult/ourResults/umlsRelatedness.txt");
-        correlation = calculateCorrelation(umlsRelatedness, groundTruthMean);
-        System.out.println("Correlation result between OUR METHOD-(ONLY UMLS (UMLS RELATEDNESS - VECTOR)) and GROUNDTRUTH is: " + correlation);
-
-        System.out.println("\n************************************************************************\n");
-
     }
-
     public static void main(String[] args) throws SLIB_Exception, IOException {
 
         DoubleVector groundTruthMean = readCorrelationFiles("correlationResult/groundTruth/MEAN.txt");
