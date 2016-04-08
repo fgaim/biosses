@@ -1,1 +1,1 @@
-Recent work in model systems and acute myelogenous leukemia has suggested that expression of MCL-1 is a key determinant of resistance to ABT-737
+We, and others, have recently described the inducible-Kras*p53+/ (iKras*p53+/) mouse model of pancreatic cancer, that allows tissue-specific, inducible and reversible expression of mutant Kras in combination with a loss of function allele of the tumor suppressor p53.

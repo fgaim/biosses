@@ -1,5 +1,6 @@
 package semanticSimilaritySystems.core;
 
+import org.openrdf.query.algebra.Str;
 import semanticSimilaritySystems.baseline.BaselineMethod;
 import semanticSimilaritySystems.baseline.SimMetricFunctions;
 import semanticSimilaritySystems.unsupervisedMethod.LSA.LsaDocumentSimilarity;
@@ -10,7 +11,9 @@ import slib.utils.ex.SLIB_Exception;
 
 
 import java.io.*;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -75,22 +78,35 @@ public class Main {
 
         /***********************************LSA********************************************/
 
-        measure = new LsaDocumentSimilarity();
-        for(Pair currentPair: pairList){
-            double similarityScore =measure.getSimilarity(currentPair.getSentence1(), currentPair.getSentence2());
-            System.out.println(similarityScore);
-        }
+//        measure = new LsaDocumentSimilarity();
+//        for(Pair currentPair: pairList){
+//            double similarityScore =measure.getSimilarity(currentPair.getSentence1(), currentPair.getSentence2());
+//       //     System.out.println(similarityScore);
+//        }
         /**********************************************************************************/
 
         /**************************************COMBINED METHOD**************************************/
 
-       measure = new CombinedOntologyMethod();
-   //     measure1.writeAllUmlsTerms("umlsTerms.txt", pairList);
-//        for(Pair currentPair: pairList){
-//            double similarityScore =measure.getSimilarity(currentPair.getSentence1(), currentPair.getSentence2());
-//            System.out.println(similarityScore);
-//            //break;
-//        }
+       CombinedOntologyMethod measure1 = new CombinedOntologyMethod();
+    //    measure1.writeAllUmlsTerms("umlsTerms.txt", pairList);
+        for(Pair currentPair: pairList){
+            double similarityScore =measure1.getSimilarity(currentPair.getSentence1(), currentPair.getSentence2());
+            System.out.println(similarityScore);
+            //break;
+        }
+
+
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(new File("pair_scores.txt")));
+        HashMap<String,Double> pair_score = measure1.returnPairScoreHash();
+        Iterator<String> it = pair_score.keySet().iterator();
+        while (it.hasNext()){
+            String pair = it.next();
+            double score= pair_score.get(pair);
+            bufferedWriter.write(pair + " " + score);
+            bufferedWriter.newLine();
+        }
+        bufferedWriter.close();
+
 //        /**********************************************************************************/
 
     }

@@ -50,8 +50,8 @@ public class LsaDocumentSimilarity implements SimilarityMeasure {
 
         double similarity =
                 Similarity.cosineSimilarity(documentVector, documentVector2);
-       // System.out.printf("The similarity of %s and %s is %f%n",
-             //   args[1], args[2], similarity);
+        System.out.printf("The similarity of %s and %s is %f%n",
+                args[1], args[2], similarity);
 
         return similarity;
     }
@@ -120,7 +120,7 @@ public class LsaDocumentSimilarity implements SimilarityMeasure {
 
     public static void createDocumentForSentences(String sentence1, String sentence2, String filePathForSentence1, String filePathForSentence2) throws IOException {
 
-        BufferedWriter bufferForSentence1 = new BufferedWriter(new FileWriter(Resources.getResource(filePathForSentence1).getFile()));
+        BufferedWriter bufferForSentence1 = new BufferedWriter(new FileWriter(new File(Resources.getResource(filePathForSentence1).getFile())));
         BufferedWriter bufferForSentence2 = new BufferedWriter(new FileWriter(new File(Resources.getResource(filePathForSentence2).getFile())));
 
         bufferForSentence1.write(preprocess(sentence1));

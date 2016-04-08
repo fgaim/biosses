@@ -145,23 +145,59 @@ public class Test {
 
         evaluateOurMethodsUsingWordNet(groundTruthMean);
         evaluateOurMethodsUsingUmls(groundTruthMean);
+        evaluateOurMethodsUsingCombinedOntology(groundTruthMean);
 
     }
 
+    public static void evaluateOurMethodsUsingCombinedOntology(DoubleVector groundTruthMean) throws IOException {
+
+        System.out.println("\n************************************************************************\n");
+
+        DoubleVector umlsCombinedMethod = readCorrelationFiles("correlationResult/ourResults/combinedMethod0,5.txt");
+        double correlation = calculateCorrelation(umlsCombinedMethod, groundTruthMean);
+        System.out.println("Correlation result between OUR METHOD-(COMBINED METHOD-0.5 and 1 threshold)) and GROUNDTRUTH is: " + correlation);
+
+        DoubleVector umlsCombinedMethodAverage = readCorrelationFiles("correlationResult/ourResults/averagecombinemethod.txt");
+        correlation = calculateCorrelation(umlsCombinedMethodAverage, groundTruthMean);
+        System.out.println("Correlation result between OUR METHOD-(COMBINED METHOD - AVERAGE CDIST&PATH)) and GROUNDTRUTH is: " + correlation);
+
+        System.out.println("\n************************************************************************\n");
+
+    }
     public static void evaluateOurMethodsUsingUmls(DoubleVector groundTruthMean) throws IOException {
         System.out.println("\n************************************************************************\n");
         DoubleVector onlyUmls_SnometCt = readCorrelationFiles("correlationResult/ourResults/onlyUmls/onlyUmls_SnomedCt.txt");
         double correlation = calculateCorrelation(onlyUmls_SnometCt, groundTruthMean);
-        System.out.println("Correlation result between OUR METHOD-(ONLY UMLS (SNOMED-CT-PATH)) and GROUNDTRUTH is: " + correlation);
+   //     System.out.println("Correlation result between OUR METHOD-(ONLY UMLS (SNOMED-CT-PATH)) and GROUNDTRUTH is: " + correlation);
 
-        DoubleVector umlsRelatedness = readCorrelationFiles("correlationResult/ourResults/onlyUmls/umlsRelatedness.txt");
+        DoubleVector umlsRelatedness = readCorrelationFiles("correlationResult/ourResults/onlyUmls/umlsRelatednessVector.txt");
         correlation = calculateCorrelation(umlsRelatedness, groundTruthMean);
         System.out.println("Correlation result between OUR METHOD-(ONLY UMLS (UMLS RELATEDNESS-ALL - VECTOR)) and GROUNDTRUTH is: " + correlation);
 
-        DoubleVector umlsRelatednessCUI = readCorrelationFiles("correlationResult/ourResults/onlyUmls/umlsRelatednessCUI.txt");
+        DoubleVector umlsRelatednessCUI = readCorrelationFiles("correlationResult/ourResults/onlyUmls/umlsRelatednessCUILesk.txt");
         correlation = calculateCorrelation(umlsRelatednessCUI, groundTruthMean);
         System.out.println("Correlation result between OUR METHOD-(ONLY UMLS (UMLS RELATEDNESS-CUI - LESK)) and GROUNDTRUTH is: " + correlation);
 
+        DoubleVector umlsOMIMMSH_WP = readCorrelationFiles("correlationResult/ourResults/onlyUmls/umlsOMIM_MESH_WP.txt");
+        correlation = calculateCorrelation(umlsOMIMMSH_WP, groundTruthMean);
+        System.out.println("Correlation result between OUR METHOD-(ONLY UMLS (UMLS OMIM-MSH - WP)) and GROUNDTRUTH is: " + correlation);
+
+        DoubleVector umlsOMIMMSH_JCN = readCorrelationFiles("correlationResult/ourResults/onlyUmls/umlsOMIM_MESH_JCN.txt");
+        correlation = calculateCorrelation(umlsOMIMMSH_JCN, groundTruthMean);
+        System.out.println("Correlation result between OUR METHOD-(ONLY UMLS (UMLS OMIM-MSH - JCN)) and GROUNDTRUTH is: " + correlation);
+
+
+        DoubleVector umlsOMIMMSH_LIN = readCorrelationFiles("correlationResult/ourResults/onlyUmls/umlsOMIM_MESH_LIN.txt");
+        correlation = calculateCorrelation(umlsOMIMMSH_LIN, groundTruthMean);
+        System.out.println("Correlation result between OUR METHOD-(ONLY UMLS (UMLS OMIM-MSH - LIN)) and GROUNDTRUTH is: " + correlation);
+
+        DoubleVector umlsAllCUI_Vector = readCorrelationFiles("correlationResult/ourResults/onlyUmls/umlsAll_vector_CUI.txt");
+        correlation = calculateCorrelation(umlsAllCUI_Vector, groundTruthMean);
+        System.out.println("Correlation result between OUR METHOD-(ONLY UMLS (UMLS ALL - CUI-VECTOR)) and GROUNDTRUTH is: " + correlation);
+
+        DoubleVector umlsOMIMMSH_CDIST = readCorrelationFiles("correlationResult/ourResults/onlyUmls/umlsOMIM_MESH_CDIST.txt");
+        correlation = calculateCorrelation(umlsOMIMMSH_CDIST, groundTruthMean);
+        System.out.println("Correlation result between OUR METHOD-(ONLY UMLS (UMLS OMIM-MSH - CDIST)) and GROUNDTRUTH is: " + correlation);
 
         System.out.println("\n************************************************************************\n");
 
@@ -207,16 +243,12 @@ public class Test {
 
         DoubleVector vector = readCorrelationFiles("correlationResult/ourResults/onlyWordnet/vector.txt");
         correlation = calculateCorrelation(vector, groundTruthMean);
-        System.out.println("Correlation result between OUR METHOD-(ONLY WORDNET - VECTOR) and GROUNDTRUTH is: " + correlation);
+    //    System.out.println("Correlation result between OUR METHOD-(ONLY WORDNET - VECTOR) and GROUNDTRUTH is: " + correlation);
 
 
         DoubleVector wordnetUsingMetamap = readCorrelationFiles("correlationResult/ourResults/onlyWordnet/wordnetUsingMetamap.txt");
         correlation = calculateCorrelation(wordnetUsingMetamap, groundTruthMean);
-        System.out.println("Correlation result between OUR METHOD-(ONLY WORDNET -  BASELINE-USING METAMAP) and GROUNDTRUTH is: " + correlation);
-
-        DoubleVector test = readCorrelationFiles("correlationResult/ourResults/onlyWordnet/test.txt");
-        correlation = calculateCorrelation(test, groundTruthMean);
-        System.out.println("Correlation result between OUR METHOD-(ONLY TEST) and GROUNDTRUTH is: " + correlation);
+   //     System.out.println("Correlation result between OUR METHOD-(ONLY WORDNET -  BASELINE-USING METAMAP) and GROUNDTRUTH is: " + correlation);
 
         System.out.println("\n************************************************************************\n");
 
@@ -225,10 +257,10 @@ public class Test {
 
         DoubleVector groundTruthMean = readCorrelationFiles("correlationResult/groundTruth/MEAN.txt");
         DoubleVector biomedicalAnnotator = readCorrelationFiles("correlationResult/groundTruth/annotatorD.txt");
-        evaluateBaselineResults(biomedicalAnnotator);
+        evaluateBaselineResults(groundTruthMean);
         // evaluateEachAnnotatorCorrelations(groundTruthMean);
-        evaluateStateOfTheArtSystems(biomedicalAnnotator);
-        evaluateOurMethods(biomedicalAnnotator);
+        evaluateStateOfTheArtSystems(groundTruthMean);
+        evaluateOurMethods(groundTruthMean);
 
     }
 }
