@@ -42,8 +42,8 @@ public class UmlsSimilarity implements SimilarityMeasure {
      public static double calculateUmlsPairScore(String word1, String word2) throws SLIB_Exception, IOException {
 
          double similarityScore = 0;
-         String[] command = {"query-umls-similarity-webinterface.pl", "--measure","lesk","--sab" ,"UMLS_ALL",
-                 "--rel" ,"CUI", word1, word2};
+         String[] command = {"query-umls-similarity-webinterface.pl", "--measure","cdist","--sab" ,"OMIM,MSH",
+                 "--rel" ,"PAR/CHD", word1, word2};
          ProcessBuilder builder = new ProcessBuilder( command );
          File commandDir = new File("/home/gizem/WorkingProjectFolder/UMLS-Similarity/webInterface/"  +"UMLS-Similarity-1.45/utils");
          builder.directory(commandDir);

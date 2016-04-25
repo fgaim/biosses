@@ -3,11 +3,13 @@ import weka.classifiers.Evaluation;
 import weka.classifiers.evaluation.Prediction;
 import weka.classifiers.trees.RandomForest;
 import weka.core.Attribute;
+import weka.core.Debug;
 import weka.core.Instances;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.util.Random;
 
 /**
  * Created by orhan on 31.01.2016.
@@ -27,32 +29,38 @@ public class RandomForestRegression {
     public static void runRandomForestRegression() throws Exception {
 
         BufferedReader br = null;
-        int numFolds = 3;
-        br = new BufferedReader(new FileReader("D:\\IntelligentChatBot\\ipec\\scripts\\trainingData.arff"));
+        int numFolds = 10;
+        br = new BufferedReader(new FileReader("rawData_biomedical.arff"));
 
         Instances trainData = new Instances(br);
 
         trainData.setClassIndex(trainData.numAttributes() - 1);
         br.close();
-        RandomForest rf = new RandomForest();
-        rf.setNumTrees(10);
+        double accuracy = 0;
+        for(int i=0; i < 10; i++) {
+            RandomForest rf = new RandomForest();
+            rf.setNumTrees(10);
 
-        rf.buildClassifier(trainData);
-        Evaluation evaluation = new Evaluation(trainData);
-
-
-        /*******************CROSS VALIDATION*************************/
-        //  evaluation.crossValidateModel(rf, trainData, numFolds, new Random(1));
-        /***********************************************************/
+            rf.buildClassifier(trainData);
+            Evaluation evaluation = new Evaluation(trainData);
 
 
-        /*******************Evaluation********************/
-        double[] prediction_results = evaluation.evaluateModel(rf,trainData);
-        /************************************************/
-
-        evaluateResults(evaluation);
+            /*******************CROSS VALIDATION*************************/
+            evaluation.crossValidateModel(rf, trainData, numFolds, new Random(1));
+            /***********************************************************/
 
 
+            /*******************Evaluation********************/
+            //  double[] prediction_results = evaluation.evaluateModel(rf,trainData);
+            /************************************************/
+
+
+            accuracy += evaluation.correlationCoefficient();
+            System.out.println("ACCURACY: " + accuracy);
+            evaluateResults(evaluation);
+
+        }
+        System.out.println(accuracy/10.0);
     }
 
     public static void evaluateResults(Evaluation evaluation){

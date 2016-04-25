@@ -17,36 +17,37 @@ public class MultiLayerPerceptron {
         m.classify();
 
     }
-    public  void classify(){
-
-        try{
-            FileReader trainreader = new FileReader("D:\\IntelligentChatBot\\ipec\\scripts\\trainingData.arff");
+    public  void classify() throws Exception {
 
 
-            Instances train = new Instances(trainreader);
 
-            train.setClassIndex(train.numAttributes() - 1);
-
-            MultilayerPerceptron mlp = new MultilayerPerceptron();
-            mlp.setOptions(Utils.splitOptions("-L 0.3 -M 0.2 -N 500 -V 0 -S 0 -E 20 -H 4"));
+        FileReader trainreader = new FileReader("rawData_biomedical.arff");
 
 
-            mlp.buildClassifier(train);
+        Instances train = new Instances(trainreader);
 
-            Evaluation eval = new Evaluation(train);
-            //evaluation.crossValidateModel(rf, trainData, numFolds, new Random(1));
-            eval.crossValidateModel(mlp, train, 3, new Random(1));
-            // eval.evaluateModel(mlp, train);
-            System.out.println(eval.toSummaryString("\nResults\n======\n", false));
-            trainreader.close();
+        train.setClassIndex(train.numAttributes() - 1);
+
+        double accuracy = 0 ;
+
+            for (int i = 0; i < 10; i++) {
+                MultilayerPerceptron mlp = new MultilayerPerceptron();
+                mlp.setOptions(Utils.splitOptions("-L 0.3 -M 0.2 -N 500 -V 0 -S 0 -E 20 -H 4"));
 
 
-        } catch(Exception ex){
+                mlp.buildClassifier(train);
 
-            ex.printStackTrace();
+                Evaluation eval = new Evaluation(train);
+                //evaluation.crossValidateModel(rf, trainData, numFolds, new Random(1));
+                eval.crossValidateModel(mlp, train, 10, new Random(1));
+                // eval.evaluateModel(mlp, train);
+                System.out.println(eval.toSummaryString("\nResults\n======\n", false));
+                trainreader.close();
+                accuracy += eval.correlationCoefficient();
 
-        }
+            }
 
+        System.out.println("Avg Correlation: " + accuracy/10);
 
     }
 }

@@ -1,1 +1,1 @@
-We, and others, have recently described the inducible-Kras*p53+/ (iKras*p53+/) mouse model of pancreatic cancer, that allows tissue-specific, inducible and reversible expression of mutant Kras in combination with a loss of function allele of the tumor suppressor p53.
+Tumorigenesis is a multistage process that involves multiple cell types.
