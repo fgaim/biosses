@@ -59,78 +59,87 @@ public class Test {
         DoubleVector overlapSW  =readCorrelationFiles("correlationResult/baselineResults/SW/overlapSW.txt");
         DoubleVector smithSW = readCorrelationFiles("correlationResult/baselineResults/SW/smithWatermanSW.txt");
         DoubleVector jaccardSW = readCorrelationFiles("correlationResult/baselineResults/SW/jaccardSW.txt");
-        DoubleVector wunchSW = readCorrelationFiles("correlationResult/baselineResults/SW/wunchSW.txt");
+        DoubleVector wunchSW = readCorrelationFiles("correlationResult/baselineResults/SW/mongeElkanSW.txt");
         DoubleVector longestCommonSubseqSW = readCorrelationFiles("correlationResult/baselineResults/SW/longestCommonSubseqSW.txt");
         DoubleVector longestCommonSubstringSW = readCorrelationFiles("correlationResult/baselineResults/SW/longestCommonSubstringSW.txt");
         DoubleVector simonSW = readCorrelationFiles("correlationResult/baselineResults/SW/simonWhiteSW.txt");
         DoubleVector levenshteinSW = readCorrelationFiles("correlationResult/baselineResults/SW/levenshteinSW.txt");
 
+        DoubleVector jaroWinklerSW = readCorrelationFiles("correlationResult/baselineResults/SW/jaroWinklerSW.txt");
+        DoubleVector needLemanWunchSW = readCorrelationFiles("correlationResult/baselineResults/SW/needlemanSW.txt");
         double correlation = calculateCorrelation(cosine, groundTruthMean);
-        System.out.println("Correlation result between BASELINE-COSINE SIMILARIY and GROUNDTRUTH is: " + correlation);
+       // System.out.println("Correlation result between BASELINE-COSINE SIMILARIY and GROUNDTRUTH is: " + correlation);
 
         correlation = calculateCorrelation(cosineSW, groundTruthMean);
         System.out.println("Correlation result between BASELINE-COSINE SIMILARIY SW and GROUNDTRUTH is: " + correlation);
 
         correlation = calculateCorrelation(jaccard, groundTruthMean);
-        System.out.println("Correlation result between BASELINE-JACCARD and GROUNDTRUTH is: " + correlation);
+       // System.out.println("Correlation result between BASELINE-JACCARD and GROUNDTRUTH is: " + correlation);
 
         correlation = calculateCorrelation(jaccardSW, groundTruthMean);
         System.out.println("Correlation result between BASELINE-JACCARD SW and GROUNDTRUTH is: " + correlation);
 
         correlation = calculateCorrelation(blockDistance, groundTruthMean);
-        System.out.println("Correlation result between BASELINE-BLOCK DISTANCE and GROUNDTRUTH is: " + correlation);
+        //System.out.println("Correlation result between BASELINE-BLOCK DISTANCE and GROUNDTRUTH is: " + correlation);
 
         correlation = calculateCorrelation(blockSW, groundTruthMean);
         System.out.println("Correlation result between BASELINE-BLOCK DISTANCE SW and GROUNDTRUTH is: " + correlation);
 
         correlation = calculateCorrelation(levenshtein, groundTruthMean);
-        System.out.println("Correlation result between BASELINE-LEVENSHTEIN and GROUNDTRUTH is: " + correlation);
+        //System.out.println("Correlation result between BASELINE-LEVENSHTEIN and GROUNDTRUTH is: " + correlation);
 
         correlation = calculateCorrelation(levenshteinSW, groundTruthMean);
         System.out.println("Correlation result between BASELINE-LEVENSHTEIN SW and GROUNDTRUTH is: " + correlation);
 
         correlation = calculateCorrelation(longestCommonSubstring, groundTruthMean);
-        System.out.println("Correlation result between BASELINE-LONGEST COMMON SUBSTRING and GROUNDTRUTH is: " + correlation);
+       // System.out.println("Correlation result between BASELINE-LONGEST COMMON SUBSTRING and GROUNDTRUTH is: " + correlation);
 
         correlation = calculateCorrelation(longestCommonSubstringSW, groundTruthMean);
         System.out.println("Correlation result between BASELINE-LONGEST COMMON SUBSTRING SW and GROUNDTRUTH is: " + correlation);
 
         correlation = calculateCorrelation(longestCommonSubsequence, groundTruthMean);
-        System.out.println("Correlation result between BASELINE-LONGEST COMMON SUBSEQUENCE and GROUNDTRUTH is: " + correlation);
+        //System.out.println("Correlation result between BASELINE-LONGEST COMMON SUBSEQUENCE and GROUNDTRUTH is: " + correlation);
 
         correlation = calculateCorrelation(longestCommonSubseqSW, groundTruthMean);
         System.out.println("Correlation result between BASELINE-LONGEST COMMON SUBSEQUENCE SW and GROUNDTRUTH is: " + correlation);
 
         correlation = calculateCorrelation(needLemanWunch, groundTruthMean);
-        System.out.println("Correlation result between BASELINE-NEEDLEMANWUNCH and GROUNDTRUTH is: " + correlation);
+       // System.out.println("Correlation result between BASELINE-NEEDLEMANWUNCH and GROUNDTRUTH is: " + correlation);
+
+
+        correlation = calculateCorrelation(needLemanWunchSW, groundTruthMean);
+        System.out.println("Correlation result between BASELINE-NEEDLEMANWUNCH SW and GROUNDTRUTH is: " + correlation);
 
 
         correlation = calculateCorrelation(jaroWinkler, groundTruthMean);
-        System.out.println("Correlation result between BASELINE-JAROWINKLER and GROUNDTRUTH is: " + correlation);
+       // System.out.println("Correlation result between BASELINE-JAROWINKLER and GROUNDTRUTH is: " + correlation);
+
+        correlation = calculateCorrelation(jaroWinklerSW, groundTruthMean);
+        System.out.println("Correlation result between BASELINE-JAROWINKLER SW and GROUNDTRUTH is: " + correlation);
 
         correlation = calculateCorrelation(overlapCoefficient, groundTruthMean);
-        System.out.println("Correlation result between BASELINE-OVERLAPCOEFFICIENT and GROUNDTRUTH is: " + correlation);
+        //System.out.println("Correlation result between BASELINE-OVERLAPCOEFFICIENT and GROUNDTRUTH is: " + correlation);
 
 
         correlation = calculateCorrelation(overlapSW, groundTruthMean);
         System.out.println("Correlation result between BASELINE-OVERLAPCOEFFICIENT SW and GROUNDTRUTH is: " + correlation);
 
         correlation = calculateCorrelation(smithWaterman, groundTruthMean);
-        System.out.println("Correlation result between BASELINE-SMITHWATERMAN and GROUNDTRUTH is: " + correlation);
+        //System.out.println("Correlation result between BASELINE-SMITHWATERMAN and GROUNDTRUTH is: " + correlation);
 
 
         correlation = calculateCorrelation(smithSW, groundTruthMean);
         System.out.println("Correlation result between BASELINE-SMITHWATERMAN SW and GROUNDTRUTH is: " + correlation);
 
         correlation = calculateCorrelation(qGrams, groundTruthMean);
-        System.out.println("Correlation result between BASELINE-QGRAMS DISTANCE and GROUNDTRUTH is: " + correlation);
+        //System.out.println("Correlation result between BASELINE-QGRAMS DISTANCE and GROUNDTRUTH is: " + correlation);
 
         correlation = calculateCorrelation(qramSW, groundTruthMean);
         System.out.println("Correlation result between BASELINE-QGRAMS DISTANCE WITH STOP WORDS and GROUNDTRUTH is: " + correlation);
 
 
         correlation = calculateCorrelation(simonWhite, groundTruthMean);
-        System.out.println("Correlation result between BASELINE-SIMON-WHITE DISTANCE and GROUNDTRUTH is: " + correlation);
+        //System.out.println("Correlation result between BASELINE-SIMON-WHITE DISTANCE and GROUNDTRUTH is: " + correlation);
 
         correlation = calculateCorrelation(simonSW, groundTruthMean);
         System.out.println("Correlation result between BASELINE-SIMON-WHITE SW DISTANCE and GROUNDTRUTH is: " + correlation);
@@ -158,14 +167,24 @@ public class Test {
     public static void evaluateEachAnnotatorCorrelations(DoubleVector groundTruthMean) throws IOException {
 
         DoubleVector annotatorA = readCorrelationFiles("correlationResult/groundTruth/annotatorA.txt");
+        DoubleVector annotatorA_new = readCorrelationFiles("correlationResult/groundTruth/annotatorA_new.txt");
+
         DoubleVector annotatorB = readCorrelationFiles("correlationResult/groundTruth/annotatorB.txt");
+        DoubleVector annotatorB_new = readCorrelationFiles("correlationResult/groundTruth/annotatorB_new.txt");
+
         DoubleVector annotatorC = readCorrelationFiles("correlationResult/groundTruth/annotatorC.txt");
         DoubleVector annotatorD = readCorrelationFiles("correlationResult/groundTruth/annotatorD.txt");
         DoubleVector annotatorE = readCorrelationFiles("correlationResult/groundTruth/annotatorE.txt");
 
-        double correlation = calculateCorrelation(annotatorC, annotatorA);
-        System.out.println("Correlation result between ANNOTATOR C and MEAN GROUNDTRUTH is: " + correlation);
-        System.out.println("\n************************************************************************\n");
+        double correlationA = calculateCorrelation(groundTruthMean, annotatorA);
+        double correlationA_new = calculateCorrelation(groundTruthMean, annotatorA_new);
+
+        double correlationB = calculateCorrelation(groundTruthMean, annotatorB);
+        double correlationB_new = calculateCorrelation(groundTruthMean, annotatorB_new);
+
+        double correlationE = calculateCorrelation(groundTruthMean, annotatorE);
+        System.out.println("a " + correlationA + "a_new " + correlationA_new + "b " + correlationB + "b_new " + correlationB_new);
+        System.out.println("\n********"+ correlationE);
 
     }
     public static  void evaluateOurMethods(DoubleVector groundTruthMean) throws IOException {
@@ -200,29 +219,25 @@ public class Test {
 
         DoubleVector umlsCombinedMethod = readCorrelationFiles("correlationResult/ourResults/combined/combinedMethod0,5.txt");
         double correlation = calculateCorrelation(umlsCombinedMethod, groundTruthMean);
-     //   System.out.println("Correlation result between OUR METHOD-(COMBINED METHOD-0.5 and 1 threshold)) and GROUNDTRUTH is: " + correlation);
+        System.out.println("Correlation result between OUR METHOD-(COMBINED METHOD-0.5 and 1 threshold)) and GROUNDTRUTH is: " + correlation);
 
         DoubleVector umlsCombinedMethodAverage = readCorrelationFiles("correlationResult/ourResults/combined/averageCombinedMethod.txt");
         correlation = calculateCorrelation(umlsCombinedMethodAverage, groundTruthMean);
         System.out.println("Correlation result between OUR METHOD-(COMBINED METHOD - AVERAGE CDIST&PATH)) and GROUNDTRUTH is: " + correlation);
 
-//        DoubleVector umlsUsingWordnetInfo = readCorrelationFiles("correlationResult/ourResults/umlsUsingWordNetInformation.txt");
-//        correlation = calculateCorrelation(umlsUsingWordnetInfo, groundTruthMean);
-//        System.out.println("Correlation result between OUR METHOD-(COMBINED METHOD - UMLS USING WORDNET INFO - CDIST&PATH)) and GROUNDTRUTH is: " + correlation);
 
-        DoubleVector combinedVectorCdistSW = readCorrelationFiles("correlationResult/ourResults/combined/wordLevelAvgMethod_SW.txt");
-        correlation = calculateCorrelation(combinedVectorCdistSW, groundTruthMean);
-        System.out.println("Correlation result between OUR METHOD-(COMBINED METHOD - AVERAGE CDIST&Vector-SW)) and GROUNDTRUTH is: " + correlation);
-
-        DoubleVector combinedVectorAvgSW = readCorrelationFiles("correlationResult/ourResults/combined/avgCombinedSw.txt");
-        correlation = calculateCorrelation(combinedVectorAvgSW, groundTruthMean);
-        System.out.println("Correlation result between OUR METHOD-(COMBINED METHOD - AVERAGE CDIST&Path-SW SENTENCE LEVEL)) and GROUNDTRUTH is: " + correlation);
+//        DoubleVector combinedVectorAvgSW = readCorrelationFiles("correlationResult/ourResults/combined/avgCombinedSw.txt");
+//        correlation = calculateCorrelation(combinedVectorAvgSW, groundTruthMean);
+//        System.out.println("Correlation result between OUR METHOD-(COMBINED METHOD - AVERAGE CDIST&Path-SW SENTENCE LEVEL)) and GROUNDTRUTH is: " + correlation);
 
         DoubleVector umlsCdistUsingWordnetInfo = readCorrelationFiles("correlationResult/ourResults/combined/umlsCdistUsingWordnetInfo.txt");
         correlation = calculateCorrelation(umlsCdistUsingWordnetInfo, groundTruthMean);
         System.out.println("Correlation result between OUR METHOD-(COMBINED METHOD - UMLS Cdit Using Wordnet Info)) and GROUNDTRUTH is: " + correlation);
 
-
+        DoubleVector combinedTest = readCorrelationFiles("correlationResult/ourResults/combined/test.txt");
+        correlation = calculateCorrelation(combinedTest, groundTruthMean);
+        System.out.println("Correlation result between OUR METHOD-(COMBINED METHOD - TEST)) and GROUNDTRUTH is: " + correlation);
+//
         System.out.println("\n************************************************************************\n");
 
     }
@@ -248,7 +263,6 @@ public class Test {
         correlation = calculateCorrelation(umlsOMIMMSH_JCN, groundTruthMean);
         System.out.println("Correlation result between OUR METHOD-(ONLY UMLS (UMLS OMIM-MSH - JCN)) and GROUNDTRUTH is: " + correlation);
 
-
         DoubleVector umlsOMIMMSH_LIN = readCorrelationFiles("correlationResult/ourResults/onlyUmls/umlsOMIM_MESH_LIN.txt");
         correlation = calculateCorrelation(umlsOMIMMSH_LIN, groundTruthMean);
         System.out.println("Correlation result between OUR METHOD-(ONLY UMLS (UMLS OMIM-MSH - LIN)) and GROUNDTRUTH is: " + correlation);
@@ -261,9 +275,9 @@ public class Test {
         correlation = calculateCorrelation(umlsOMIMMSH_CDIST, groundTruthMean);
         System.out.println("Correlation result between OUR METHOD-(ONLY UMLS (UMLS OMIM-MSH - CDIST)) and GROUNDTRUTH is: " + correlation);
 
-        DoubleVector umlsCDISTSW = readCorrelationFiles("correlationResult/ourResults/onlyUmls/cdistSW.txt");
-        correlation = calculateCorrelation(umlsCDISTSW, groundTruthMean);
-        System.out.println("Correlation result between OUR METHOD-(ONLY UMLS (UMLS OMIM-MSH - CDIST SW)) and GROUNDTRUTH is: " + correlation);
+//        DoubleVector umlsCDISTSW = readCorrelationFiles("correlationResult/ourResults/onlyUmls/cdistSW.txt");
+//        correlation = calculateCorrelation(umlsCDISTSW, groundTruthMean);
+//        System.out.println("Correlation result between OUR METHOD-(ONLY UMLS (UMLS OMIM-MSH - CDIST SW)) and GROUNDTRUTH is: " + correlation);
 
         System.out.println("\n************************************************************************\n");
 
@@ -275,22 +289,13 @@ public class Test {
         double correlation = calculateCorrelation(path, groundTruthMean);
         System.out.println("Correlation result between OUR METHOD-(ONLY WORDNET - PATH) and GROUNDTRUTH is: " + correlation);
 
-        DoubleVector pathWithMetamap = readCorrelationFiles("correlationResult/ourResults/onlyWordnet/pathWordnetWithMetamap.txt");
-        correlation = calculateCorrelation(pathWithMetamap, groundTruthMean);
-      //  System.out.println("Correlation result between OUR METHOD-(ONLY WORDNET - PATH WITH METAMAP) and GROUNDTRUTH is: " + correlation);
-
         DoubleVector pathWithIdf = readCorrelationFiles("correlationResult/ourResults/onlyWordnet/pathWordnetWithIdfScores.txt");
         correlation = calculateCorrelation(pathWithIdf, groundTruthMean);
        // System.out.println("Correlation result between OUR METHOD-(ONLY WORDNET - PATH WITH IDF) and GROUNDTRUTH is: " + correlation);
 
-
-        DoubleVector pathWithMetamapIdf = readCorrelationFiles("correlationResult/ourResults/onlyWordnet/pathWordnetWithMetamapIdfScores.txt");
-        correlation = calculateCorrelation(pathWithMetamapIdf, groundTruthMean);
-       // System.out.println("Correlation result between OUR METHOD-(ONLY WORDNET - PATH WITH METAMAP AND IDF) and GROUNDTRUTH is: " + correlation);
-
-        DoubleVector pathWithStopWords = readCorrelationFiles("correlationResult/ourResults/onlyWordnet/pathWordnetStopWords.txt");
-        correlation = calculateCorrelation(pathWithStopWords, groundTruthMean);
-        System.out.println("Correlation result between OUR METHOD-(ONLY WORDNET - PATH WITH REMOVAL STOPWORDS) and GROUNDTRUTH is: " + correlation);
+//        DoubleVector pathWithStopWords = readCorrelationFiles("correlationResult/ourResults/onlyWordnet/pathWordnetStopWords.txt");
+//        correlation = calculateCorrelation(pathWithStopWords, groundTruthMean);
+//        System.out.println("Correlation result between OUR METHOD-(ONLY WORDNET - PATH WITH REMOVAL STOPWORDS) and GROUNDTRUTH is: " + correlation);
 
         DoubleVector resnik = readCorrelationFiles("correlationResult/ourResults/onlyWordnet/resnikWordNet.txt");
         correlation = calculateCorrelation(resnik, groundTruthMean);
@@ -304,7 +309,6 @@ public class Test {
         DoubleVector lesk = readCorrelationFiles("correlationResult/ourResults/onlyWordnet/lesk.txt");
         correlation = calculateCorrelation(lesk, groundTruthMean);
         System.out.println("Correlation result between OUR METHOD-(ONLY WORDNET - LESK) and GROUNDTRUTH is: " + correlation);
-
 
         DoubleVector wuPalmer = readCorrelationFiles("correlationResult/ourResults/onlyWordnet/wuPalmer.txt");
         correlation = calculateCorrelation(wuPalmer, groundTruthMean);
@@ -324,33 +328,19 @@ public class Test {
 //        System.out.println("Correlation result between OUR METHOD-(ONLY WORDNET - HIRSTONGE) and GROUNDTRUTH is: " + correlation);
 
 
-        DoubleVector vector = readCorrelationFiles("correlationResult/ourResults/onlyWordnet/vector.txt");
-        correlation = calculateCorrelation(vector, groundTruthMean);
-        System.out.println("Correlation result between OUR METHOD-(ONLY WORDNET - VECTOR) and GROUNDTRUTH is: " + correlation);
-
-        DoubleVector vectorStopWords = readCorrelationFiles("correlationResult/ourResults/onlyWordnet/vectorStopWords.txt");
-        correlation = calculateCorrelation(vectorStopWords, groundTruthMean);
-        System.out.println("Correlation result between OUR METHOD-(ONLY WORDNET - VECTOR REMOVAL STOP WORDS) and GROUNDTRUTH is: " + correlation);
-
-        DoubleVector vectorStopWordsMetamap = readCorrelationFiles("correlationResult/ourResults/onlyWordnet/vectorMetamapStopWords.txt");
-        correlation = calculateCorrelation(vectorStopWordsMetamap, groundTruthMean);
-       // System.out.println("Correlation result between OUR METHOD-(ONLY WORDNET -  VECTOR METAMAP) and GROUNDTRUTH is: " + correlation);
-
-        DoubleVector wordnetUsingMetamap = readCorrelationFiles("correlationResult/ourResults/onlyWordnet/wordnetUsingMetamap.txt");
-        correlation = calculateCorrelation(wordnetUsingMetamap, groundTruthMean);
-       // System.out.println("Correlation result between OUR METHOD-(ONLY WORDNET -  BASELINE-USING METAMAP) and GROUNDTRUTH is: " + correlation);
-
         System.out.println("\n************************************************************************\n");
 
     }
     public static void main(String[] args) throws SLIB_Exception, IOException {
 
-        DoubleVector groundTruthMean = readCorrelationFiles("correlationResult/groundTruth/MEAN.txt");
+        DoubleVector groundTruthMean = readCorrelationFiles("correlationResult/groundTruth/test.txt");
         DoubleVector biomedicalAnnotator = readCorrelationFiles("correlationResult/groundTruth/annotatorD.txt");
-        evaluateBaselineResults(groundTruthMean);
-        // evaluateEachAnnotatorCorrelations(groundTruthMean);
-        evaluateStateOfTheArtSystems(groundTruthMean);
-        evaluateOurMethods(groundTruthMean);
+        evaluateBaselineResults(biomedicalAnnotator);
+       // evaluateEachAnnotatorCorrelations(groundTruthMean);
+        evaluateStateOfTheArtSystems(biomedicalAnnotator);
+        evaluateOurMethods(biomedicalAnnotator);
+
+
 
     }
 }

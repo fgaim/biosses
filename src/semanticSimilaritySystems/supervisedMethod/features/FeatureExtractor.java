@@ -42,7 +42,7 @@ public class FeatureExtractor {
     }
 
     public void readGroundTruth() throws IOException {
-        BufferedReader buffer = new BufferedReader(new FileReader(Resources.getResource("correlationResult/groundTruth/MEAN.txt").getFile()));
+        BufferedReader buffer = new BufferedReader(new FileReader(Resources.getResource("correlationResult/groundTruth/test.txt").getFile()));
         String line;
         while((line=buffer.readLine())!= null){
             groundTruthList.add(Double.valueOf(line));
@@ -73,18 +73,18 @@ public class FeatureExtractor {
     }
 
     public void defineAttributesInArffFileFormat(BufferedWriter writer, LinkedList<String> dict) throws IOException {
-       // String wordAttributes = defineWordAttributes(dict.size());
-        String bigramFeatures = defineWordAttributes(dict.size());
+       String wordAttributes = defineWordAttributes(dict.size());
+       // String bigramFeatures = defineWordAttributes(dict.size());
         writer.write("@relation semantic-similarity\n" +
                 "\n" +
                 "@attribute paragraphVec REAL\n" +
                 "@attribute qGram\tREAL\n" +
-
+                "@attribute combinedOntologyMethod\tREAL\n" +
+               // wordAttributes +
                 "@attribute class\tREAL\n" +
                 "\n" +
                 "@data");
 
-        //"@attribute combinedOntologyMethod\tREAL\n" +
         writer.newLine();
     }
     public static String replacePunctuations(String phrase){
@@ -140,10 +140,11 @@ public class FeatureExtractor {
     }
     public  void defineInstances(BufferedWriter writer, LinkedList<String> dict) throws IOException {
         for(Pair currentPair: pairs){
-           // String commonWordFeaturesInstance = defineCommonWordFeatureInstance(currentPair, dict);
-            String commonBigramFeatures = defineCommonBigramFeatures(currentPair, dict);
-            writer.write(currentPair.getParagraphVecResult() + "," + currentPair.getqGramSimilarityScore()+"," + groundTruthList.get(Integer.valueOf(currentPair.getPairId())-1));
-//+ currentPair.getCombinedOntologyMethod()+","
+            String commonWordFeaturesInstance = defineCommonWordFeatureInstance(currentPair, dict);
+           // String commonBigramFeatures = defineCommonBigramFeatures(currentPair, dict);
+            writer.write(currentPair.getParagraphVecResult()  + "," + currentPair.getqGramSimilarityScore()+"," +  currentPair.getCombinedOntologyMethod()+","+
+                   groundTruthList.get(Integer.valueOf(currentPair.getPairId())-1));
+
             writer.newLine();
         }
 
@@ -192,8 +193,8 @@ public class FeatureExtractor {
         LinkedList<String> bigramDict = createBigramDictionary();
 
         BufferedWriter writer = new BufferedWriter(new FileWriter(new File("rawData_biomedical.arff")));
-        defineAttributesInArffFileFormat(writer, bigramDict);
-        defineInstances(writer, bigramDict);
+        defineAttributesInArffFileFormat(writer, dict);
+        defineInstances(writer, dict);
         writer.close();
     }
 

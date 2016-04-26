@@ -68,14 +68,14 @@ public class Main {
     }
 
     public static String removeStopWordsFromSentence(String sentence, List<String> stopwords){
-        String processedS = "";
+        String processedS = sentence;
         String split[] = sentence.split("\\s+");
-        for (String s: split){
-            if(!stopwords.contains(s)){
-                processedS  = processedS +" " +s;
-            }
-
-        }
+//        for (String s: split){
+//            if(!stopwords.contains(s)){
+//                processedS  = processedS +" " +s;
+//            }
+//
+//        }
 
         processedS  =processedS.trim();
         processedS = replacePunctuations(processedS);
@@ -99,15 +99,15 @@ public class Main {
         /****************************SIMMETRICS***************************************************/
 
        measure = new SimMetricFunctions();
-//        for(Pair currentPair: pairList){
-//            String preprocessedS1 = removeStopWordsFromSentence(currentPair.getSentence1(), stopWordsList);
-//            String preprocessedS2 = removeStopWordsFromSentence(currentPair.getSentence2(), stopWordsList);
-//
-//            double similarityScore =measure.getSimilarity(preprocessedS1, preprocessedS2);
-//            //System.out.println("Sentence 1: " + preprocessedS1);
-//           // System.out.println("Sentence 2: " + preprocessedS2);
-//             System.out.println(similarityScore);
-//        }
+        for(Pair currentPair: pairList){
+            String preprocessedS1 = removeStopWordsFromSentence(currentPair.getSentence1(), stopWordsList);
+            String preprocessedS2 = removeStopWordsFromSentence(currentPair.getSentence2(), stopWordsList);
+
+            double similarityScore =measure.getSimilarity(preprocessedS1, preprocessedS2);
+            //System.out.println("Sentence 1: " + preprocessedS1);
+           // System.out.println("Sentence 2: " + preprocessedS2);
+             System.out.println(similarityScore);
+        }
 
         /**********************************************************************************/
 
@@ -135,12 +135,12 @@ public class Main {
 
         /**************************************COMBINED METHOD**************************************/
 
-        CombinedOntologyMethod measure1 = new CombinedOntologyMethod(stopWordsList);
-         for(Pair currentPair: pairList){
-            double similarityScore =measure1.getSimilarity(currentPair.getSentence1(), currentPair.getSentence2());
-            System.out.println(similarityScore);
-            //break;
-        }
+//        CombinedOntologyMethod measure1 = new CombinedOntologyMethod(stopWordsList);
+//         for(Pair currentPair: pairList){
+//            double similarityScore =measure1.getSimilarity(currentPair.getSentence1(), currentPair.getSentence2());
+//            System.out.println(similarityScore);
+//            //break;
+//        }
 //        BufferedWriter writer = new BufferedWriter(new FileWriter(new File("pair_score.txt")));
 //
 //

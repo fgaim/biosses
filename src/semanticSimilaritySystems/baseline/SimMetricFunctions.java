@@ -14,7 +14,7 @@ public class SimMetricFunctions implements SimilarityMeasure{
 
     public double getSimilarity(String sentence1, String sentence2) throws IOException {
 
-        StringMetric metric = StringMetrics.blockDistance();
+        StringMetric metric = StringMetrics.needlemanWunch();
         float result = metric.compare(sentence1, sentence2); //0.4767
         return result;
     }

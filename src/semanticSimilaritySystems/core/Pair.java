@@ -15,6 +15,10 @@ public class Pair {
     private double groundTruthSimilarityScore;
     private String pairId;
     private double paragraphVecResult;
+    private double wordnetMeasure;
+    private double umlsMeasureJCN;
+    private double umlsMeasureLin;
+    private double umlsMeasureCdist;
     private double combinedOntologyMethod;
     private double qGramSimilarityScore;
 
