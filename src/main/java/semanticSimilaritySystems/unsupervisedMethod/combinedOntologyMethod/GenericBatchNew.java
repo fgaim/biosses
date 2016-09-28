@@ -50,12 +50,9 @@ package semanticSimilaritySystems.unsupervisedMethod.combinedOntologyMethod;
  * @version	1.0, September 18, 2006
  **/
 
-
 import java.io.*;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.ArrayList;
-import gov.nih.nlm.nls.skr.*;
 
 public class GenericBatchNew
 {

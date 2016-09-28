@@ -1,5 +1,3 @@
-package test;
-
 import com.google.common.io.Resources;
 import edu.ucla.sspace.similarity.PearsonCorrelation;
 import edu.ucla.sspace.similarity.SpearmanRankCorrelation;
