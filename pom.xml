@@ -5,6 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>bounSSES</groupId>
     <artifactId>sses</artifactId>
+    <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
 
     <dependencies>
@@ -91,5 +92,9 @@
 
 
     </dependencies>
+
+    <pluginRepositories>
+
+    </pluginRepositories>
 
 </project>

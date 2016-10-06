@@ -10,8 +10,14 @@
           <root url="file://$MODULE_DIR$/src/main/webapp" relative="/" />
         </webroots>
         <sourceRoots>
+          <root url="file://$MODULE_DIR$/src/main/core" />
           <root url="file://$MODULE_DIR$/src/main/java" />
           <root url="file://$MODULE_DIR$/src/main/resources" />
+          <root url="file://$MODULE_DIR$/src/main/services" />
+          <root url="file://$MODULE_DIR$/src/preprocessing" />
+          <root url="file://$MODULE_DIR$/src/semanticSimilaritySystems" />
+          <root url="file://$MODULE_DIR$/src/similarityMeasures" />
+          <root url="file://$MODULE_DIR$/src/test" />
         </sourceRoots>
       </configuration>
     </facet>

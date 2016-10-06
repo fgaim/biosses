@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/sses.iml" filepath="$PROJECT_DIR$/.idea/sses.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sses-frontend/sses-frontend.iml" filepath="$PROJECT_DIR$/sses-frontend/sses-frontend.iml" />
     </modules>
   </component>
 </project>

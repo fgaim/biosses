@@ -145,8 +145,9 @@ public class CombinedOntologyMethod implements SimilarityMeasure{
         args[2] = "--email";
         args[3] = "gizemsogancioglu@gmail.com";
         args[4] = "input.txt";
-        String results = batch.main(args);
+      //  String results = batch.main(args);
 
+        String results = "";
        // System.out.println(results);
         return fillSentenceWithMetamapResults(results, stopWordsList);
     }
