@@ -4,7 +4,7 @@ Programmer  :  Gizem Sogancioglu,  Arzucan Ozgur
 Advisor     :  Arzucan Ozgur
 Date        :  02.09.2014
 */
-package main.core;
+package tac_core;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;

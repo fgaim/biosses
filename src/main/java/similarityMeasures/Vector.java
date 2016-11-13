@@ -7,9 +7,11 @@ Date        :  02.09.2014
 
 package similarityMeasures;
 
+
+import tac_core.Word;
+
 import java.util.ArrayList;
 import java.util.HashMap;
-import main.core.Word;
 
 /**
  *

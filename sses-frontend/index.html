@@ -1,9 +1,9 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/Template.dwt" codeOutsideHTMLIsLocked="false" -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <!-- InstanceBeginEditable name="doctitle" -->
-<title>Untitled Document</title>
+<title>Bio-SSES Online Demo</title>
 <link href="style.css" rel="stylesheet" media="all" type="text/css" />
 <link href="style.css" rel="stylesheet" type="text/css" />
 <!-- InstanceEndEditable -->
@@ -54,32 +54,62 @@
 
 <script language="JavaScript" type="text/javascript" >
     var invocation = new XMLHttpRequest();
-    var url = "http://localhost:8080/services/SSESService/";
+    var url = "http://localhost:8080/services/SSESService";
 
-    function sendCustomerSentencesToServerSide() {
+
+    function sendStringRequest(){
         var sentence1 = document.getElementById("s1").value;
         var sentence2 = document.getElementById("s2").value;
-        console.log(sentence1);
-        document.getElementById("result").value = "gizos";
-
-        console.log(document.getElementById("result").value);
         var methodType = document.getElementById("method").value;
-        console.log(methodType);
+
+//        console.log(sentence1);
+//        console.log(sentence2);
+//        console.log(methodType);
+        var requestBodyForStringFunction = "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" "
+                + "xmlns:ser=\"http://services/\">" + "<soapenv:Header/> <soapenv:Body> <ser:calculateSimilarityScoreForGivenPair> " +
+                "<arg0>"+ sentence1+"</arg0> " + "<arg1>"+ sentence2 + "</arg1> <arg2>" + methodType +"</arg2> " +
+                "</ser:calculateSimilarityScoreForGivenPair> </soapenv:Body> </soapenv:Envelope>";
+
+
+        return requestBodyForStringFunction;
+    }
+    function sendCustomerSentencesToServerSide() {
+
+        var requestBody = sendStringRequest();
         if(invocation){
             invocation.open("POST", url, true);
             invocation.setRequestHeader("Content-type", "text/xml");
-            invocation.onreadystatechange = getReturnedResult();
+            invocation.send(requestBody);
+            console.log("--------------");
+            console.log(requestBody);
+            console.log("--------------");
+
+            invocation.onreadystatechange = function(){
+                console.log(invocation.readyState);
+                console.log(invocation.status);
+                if(invocation.readyState == 4){
+                    if(invocation.status == 200){
+                        outputComingMsg();
+                    }
+                }
+            };
         }
 
+        else{
+            console.log("requestler uygun değil..")
+        }
     }
 
-    function getReturnedResult() {
-//        if(invocation.readyState == 4  invocation.status == 200){
-//            alert(invocation.responseText)
-//        }
 
-        var resultScore = invocation.responseText;
-        document.getElementById("result").value = resultScore;
+    function outputComingMsg(){
+        var response = invocation.responseXML.documentElement;
+        console.log(response);
+        var result = response.getElementsByTagName("return")[0].childNodes[0].nodeValue;
+
+        console.log(result);
+        document.getElementById("result").value = result;
+
+
     }
 
 

@@ -1,3 +1,4 @@
+package tac_core;
 /*
 Project     :  Biomedd Sum Shared Task
 Programmer  :  Gizem Sogancioglu,  Arzucan Ozgur
@@ -5,7 +6,6 @@ Advisor     :  Arzucan Ozgur
 Date        :  02.09.2014
 */
 
-package main.core;
 import java.util.ArrayList;
 
 /**

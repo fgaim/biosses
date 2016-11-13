@@ -5,7 +5,7 @@ Advisor     :  Arzucan Ozgur
 Date        :  22.05.2015
 ********Main Class************
 */
-package main.core;
+package tac_core;
 import java.io.IOException;
 import java.util.LinkedHashMap;
 

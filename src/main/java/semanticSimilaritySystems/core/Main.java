@@ -1,17 +1,8 @@
 package semanticSimilaritySystems.core;
-
 import com.google.common.io.Resources;
-import org.openrdf.query.algebra.Str;
 import semanticSimilaritySystems.baseline.BaselineMethod;
 import semanticSimilaritySystems.baseline.SimMetricFunctions;
-import semanticSimilaritySystems.supervisedMethod.features.FeatureExtractor;
-import semanticSimilaritySystems.unsupervisedMethod.LSA.LsaDocumentSimilarity;
-import semanticSimilaritySystems.unsupervisedMethod.combinedOntologyMethod.CombinedOntologyMethod;
-import semanticSimilaritySystems.unsupervisedMethod.paragraphVector.ParagraphVector;
-import semanticSimilaritySystems.unsupervisedMethod.paragraphVector.ParagraphVectorModel;
 import slib.utils.ex.SLIB_Exception;
-
-
 import java.io.*;
 import java.util.*;
 
@@ -20,73 +11,13 @@ import java.util.*;
  */
 public class Main {
 
-    public static String replacePunctuations(String phrase){
 
-        phrase = phrase.trim();
-        phrase = phrase.replaceAll("\\.","");
-        phrase = phrase.replaceAll(";","");
-        phrase = phrase.replaceAll("-","");
-        phrase = phrase.replaceAll(":","");
-        phrase = phrase.replaceAll(",","");
-        phrase = phrase.replaceAll("_","");
-        phrase = phrase.replaceAll("!", "");
-       // phrase = phrase.replace(" " , "");
-        phrase = phrase.replaceAll("\\(", "");
-        phrase = phrase.replaceAll("\\)", "");
-        phrase = phrase.replaceAll("\\[", "");
-        phrase = phrase.replaceAll("\\]", "");
-        phrase = phrase.replaceAll("\\*", "");
-        phrase = phrase.replaceAll("/", "");
-        phrase = phrase.replaceAll("\\?", "");
+    public static void calculateSimilarityScoreAmongSentencesUsingUnsupervisedMethods(List<Pair> pairList, FileOperations fileOperations) throws SLIB_Exception, IOException {
 
-
-        return phrase.toLowerCase();
-    }
-
-
-    public static HashSet<String> addSentenceToDictionary(HashSet<String> dictionary, String sentence, List<String> stops){
-        String[] split = sentence.toLowerCase().split("\\s+");
-        for(String word:split){
-            word = replacePunctuations(word);
-            word = word.trim();
-            if(!dictionary.contains(word) && !stops.contains(word))
-                dictionary.add(word);
-        }
-
-        return dictionary;
-    }
-    public static HashSet<String> constructDictionary(List<Pair> pairList, List<String> stops){
-        HashSet<String> dictionary = new HashSet<String>();
-        for(Pair current: pairList){
-
-            dictionary = addSentenceToDictionary(dictionary, current.getSentence1(),stops);
-
-            dictionary = addSentenceToDictionary(dictionary,current.getSentence2(),stops);
-
-        }
-        return dictionary;
-    }
-
-    public static String removeStopWordsFromSentence(String sentence, List<String> stopwords){
-        String processedS = sentence;
-        String split[] = sentence.split("\\s+");
-//        for (String s: split){
-//            if(!stopwords.contains(s)){
-//                processedS  = processedS +" " +s;
-//            }
-//
-//        }
-
-        processedS  =processedS.trim();
-        processedS = replacePunctuations(processedS);
-        return processedS.trim();
-    }
-    public static void calculateSimilarityScoreAmongSentencesUsingUnsupervisedMethods(List<Pair> pairList) throws SLIB_Exception, IOException {
-
-        List<String> stopWordsList = readStopWordsList();
+        List<String> stopWordsList = fileOperations.readStopWordsList();
 
         /****************************BASELINE**********************************************/
-        SimilarityMeasure measure = new BaselineMethod(constructDictionary(pairList,stopWordsList));
+        SimilarityMeasure measure = new BaselineMethod(fileOperations.constructDictionary(pairList,stopWordsList));
 //          for(Pair currentPair: pairList){
 //
 //          double similarityScore =measure.getSimilarity(currentPair.getSentence1(), currentPair.getSentence2());
@@ -100,8 +31,8 @@ public class Main {
 
        measure = new SimMetricFunctions();
         for(Pair currentPair: pairList){
-            String preprocessedS1 = removeStopWordsFromSentence(currentPair.getSentence1(), stopWordsList);
-            String preprocessedS2 = removeStopWordsFromSentence(currentPair.getSentence2(), stopWordsList);
+            String preprocessedS1 = fileOperations.removeStopWordsFromSentence(currentPair.getSentence1(), stopWordsList);
+            String preprocessedS2 = fileOperations.removeStopWordsFromSentence(currentPair.getSentence2(), stopWordsList);
 
             double similarityScore =measure.getSimilarity(preprocessedS1, preprocessedS2);
             //System.out.println("Sentence 1: " + preprocessedS1);
@@ -158,42 +89,12 @@ public class Main {
 
     }
 
-    public HashMap<String, Double> readIDFScores() throws IOException {
-        BufferedReader buffer = new BufferedReader(new FileReader(Resources.getResource("idfScores/idf_values_tac_data.txt").getFile()));
-        String line;
-        HashMap<String , Double> idf_hash = new HashMap<String, Double>();
-
-        while ((line = buffer.readLine())!=null){
-            String[] split = line.split("\\s+");
-            String word = split[0];
-            Double value = Double.valueOf(split[1]);
-            if(!idf_hash.containsKey(word))
-                idf_hash.put(word, value);
-        }
-
-
-        return idf_hash;
-
-    }
-    public static List<String> readStopWordsList() throws IOException {
-        List<String> stopWordsList = new ArrayList<String>();
-        BufferedReader bufferedReader = new BufferedReader(new FileReader(Resources.getResource("stopWords/stop_words.txt").getFile()));
-        String line;
-
-        while ((line = bufferedReader.readLine())!=null){
-            if(!stopWordsList.contains(line))
-                stopWordsList.add(line.toLowerCase());
-        }
-
-        return stopWordsList;
-
-    }
     public static void main(String[] args) throws SLIB_Exception, IOException {
         LinkedList<Pair> pairList;
         FileOperations operations = new FileOperations();
         pairList = operations.readPairsFromFile("sentencePairsData/pairs.txt");
 
-        calculateSimilarityScoreAmongSentencesUsingUnsupervisedMethods(pairList);
+        calculateSimilarityScoreAmongSentencesUsingUnsupervisedMethods(pairList, operations);
 //        FeatureExtractor featureExtractor = new FeatureExtractor(pairList);
 //       // featureExtractor.createArffFileFromInstances();
 //        featureExtractor.createSVMFileFormatInstances();

@@ -5,7 +5,7 @@ Advisor     :  Arzucan Ozgur
 Date        :  02.09.2014
 */
 
-package main.core;
+package tac_core;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import org.tartarus.martin.Stemmer;
-import preprocessing.StopWords;
+import semanticSimilaritySystems.core.StopWords;
 
 /**
  *

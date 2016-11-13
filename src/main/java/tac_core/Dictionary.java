@@ -5,7 +5,7 @@ Advisor     :  Arzucan Ozgur
 Date        :  02.09.2014
 */
 //Naive Bayes Probability'i feature olarak kullanmak! 
-package main.core;
+package tac_core;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;

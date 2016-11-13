@@ -4,8 +4,8 @@ Programmer  :  Gizem Sogancioglu,  Arzucan Ozgur
 Advisor     :  Arzucan Ozgur
 Date        :  02.09.2014
 */
-package main.core;
-import preprocessing.StopWords;
+package tac_core;
+import semanticSimilaritySystems.core.StopWords;
 
 import java.io.BufferedReader;
 import java.io.File;
