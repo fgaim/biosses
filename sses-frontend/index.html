@@ -24,10 +24,12 @@
         	<div id="Content1">
         	  <p style="text-decoration:underline">Method:</p>
         	  <select id="method">
-        	    <option value="1" >Combined Ontology Method (Using WordNet and UMLS pathmeasure)</option>
-        	    <option value="2">Qaram Similarity (Lexical Similarity)</option>
-        	    <option value="3">Paragraph Vector (Distributional Semantic Model)</option>
-        	    <option value="4">Supervised Approach</option>
+                  <option value="1" > WordNet Similarity (WS4J-Path)</option>
+                  <option value="2"> UMLS Similarity (Path) </option>
+        	    <option value="3" > Combined Ontology Method (WordNet-UMLS) </option>
+        	    <option value="4"> Qgram Similarity (Lexical Similarity) </option>
+        	    <option value="5"> Paragraph Vector (Distributional Semantic Model) </option>
+        	    <option value="6"> Supervised Approach </option>
       	    </select>
         	  <textarea name="sentence1" cols="20" rows="15" id="s1"  dir="ltr">#Enter your first sentence</textarea>
         	  <textarea name="sentence2" cols="20" rows="15" id="s2"  dir="ltr">#Enter your second sentence</textarea>
@@ -64,7 +66,7 @@
 
 //        console.log(sentence1);
 //        console.log(sentence2);
-//        console.log(methodType);
+        console.log(methodType);
         var requestBodyForStringFunction = "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" "
                 + "xmlns:ser=\"http://services/\">" + "<soapenv:Header/> <soapenv:Body> <ser:calculateSimilarityScoreForGivenPair> " +
                 "<arg0>"+ sentence1+"</arg0> " + "<arg1>"+ sentence2 + "</arg1> <arg2>" + methodType +"</arg2> " +

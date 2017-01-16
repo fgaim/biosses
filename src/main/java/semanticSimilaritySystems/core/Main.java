@@ -2,6 +2,7 @@ package semanticSimilaritySystems.core;
 import com.google.common.io.Resources;
 import semanticSimilaritySystems.baseline.BaselineMethod;
 import semanticSimilaritySystems.baseline.SimMetricFunctions;
+import semanticSimilaritySystems.unsupervisedMethod.combinedOntologyMethod.CombinedOntologyMethod;
 import slib.utils.ex.SLIB_Exception;
 import java.io.*;
 import java.util.*;
@@ -30,7 +31,7 @@ public class Main {
         /****************************SIMMETRICS***************************************************/
 
        measure = new SimMetricFunctions();
-        for(Pair currentPair: pairList){
+  /*      for(Pair currentPair: pairList){
             String preprocessedS1 = fileOperations.removeStopWordsFromSentence(currentPair.getSentence1(), stopWordsList);
             String preprocessedS2 = fileOperations.removeStopWordsFromSentence(currentPair.getSentence2(), stopWordsList);
 
@@ -38,7 +39,7 @@ public class Main {
             //System.out.println("Sentence 1: " + preprocessedS1);
            // System.out.println("Sentence 2: " + preprocessedS2);
              System.out.println(similarityScore);
-        }
+        }*/
 
         /**********************************************************************************/
 
@@ -66,24 +67,24 @@ public class Main {
 
         /**************************************COMBINED METHOD**************************************/
 
-//        CombinedOntologyMethod measure1 = new CombinedOntologyMethod(stopWordsList);
-//         for(Pair currentPair: pairList){
-//            double similarityScore =measure1.getSimilarity(currentPair.getSentence1(), currentPair.getSentence2());
-//            System.out.println(similarityScore);
-//            //break;
-//        }
-//        BufferedWriter writer = new BufferedWriter(new FileWriter(new File("pair_score.txt")));
-//
-//
-//        HashMap<String,Double> pair_scores = measure1.getPair_score();
-//        Iterator<String> it = pair_scores.keySet().iterator();
-//        while (it.hasNext()){
-//            String pairs = it.next();
-//            Double sim = pair_scores.get(pairs);
-//            writer.write(pairs + " " + sim);
-//            writer.newLine();
-//        }
-//        writer.close();
+        CombinedOntologyMethod measure1 = new CombinedOntologyMethod(stopWordsList);
+         for(Pair currentPair: pairList){
+            double similarityScore =measure1.getSimilarity(currentPair.getSentence1(), currentPair.getSentence2());
+            System.out.println(similarityScore);
+            //break;
+        }
+        BufferedWriter writer = new BufferedWriter(new FileWriter(new File("pair_score.txt")));
+
+
+        HashMap<String,Double> pair_scores = measure1.getPair_score();
+        Iterator<String> it = pair_scores.keySet().iterator();
+        while (it.hasNext()){
+            String pairs = it.next();
+            Double sim = pair_scores.get(pairs);
+            writer.write(pairs + " " + sim);
+            writer.newLine();
+        }
+        writer.close();
 
 //        /**********************************************************************************/
 
