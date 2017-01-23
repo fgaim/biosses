@@ -7,6 +7,7 @@ import semanticSimilaritySystems.baseline.SimMetricFunctions;
 import semanticSimilaritySystems.core.FileOperations;
 import semanticSimilaritySystems.core.SimilarityMeasure;
 import semanticSimilaritySystems.unsupervisedMethod.combinedOntologyMethod.CombinedOntologyMethod;
+import semanticSimilaritySystems.unsupervisedMethod.combinedOntologyMethod.UmlsSimilarity;
 import semanticSimilaritySystems.unsupervisedMethod.combinedOntologyMethod.WordNetSimilarity;
 import similarityMeasures.JaccardSimilarity;
 import slib.utils.ex.SLIB_Exception;
@@ -54,6 +55,9 @@ public class SSESService {
                 break;
 
             case 2:
+                UmlsSimilarity measureOfUMLS = new UmlsSimilarity();
+                similarityScore = measureOfUMLS.getSimilarity(s1,s2);
+                System.out.println(similarityScore);
                 //UMLS
                 break;
             case 3:

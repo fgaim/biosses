@@ -48,6 +48,7 @@ select {
 }
 textarea {
 	width:165px;
+
     
 }
 
@@ -68,6 +69,8 @@ input[type=button]{
     float: right;
 
 }
+
+
 
 ul {
     list-style-type:none;

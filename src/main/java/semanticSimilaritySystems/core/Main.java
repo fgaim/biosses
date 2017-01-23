@@ -3,6 +3,7 @@ import com.google.common.io.Resources;
 import semanticSimilaritySystems.baseline.BaselineMethod;
 import semanticSimilaritySystems.baseline.SimMetricFunctions;
 import semanticSimilaritySystems.unsupervisedMethod.combinedOntologyMethod.CombinedOntologyMethod;
+import semanticSimilaritySystems.unsupervisedMethod.combinedOntologyMethod.WordNetSimilarity;
 import slib.utils.ex.SLIB_Exception;
 import java.io.*;
 import java.util.*;
@@ -65,9 +66,12 @@ public class Main {
 //        }
         /**********************************************************************************/
 
+        WordNetSimilarity measure5 = new WordNetSimilarity();
+        double sims = measure5.getSimilarity("love","love");
+        System.out.println(sims);
         /**************************************COMBINED METHOD**************************************/
 
-        CombinedOntologyMethod measure1 = new CombinedOntologyMethod(stopWordsList);
+       /* CombinedOntologyMethod measure1 = new CombinedOntologyMethod(stopWordsList);
          for(Pair currentPair: pairList){
             double similarityScore =measure1.getSimilarity(currentPair.getSentence1(), currentPair.getSentence2());
             System.out.println(similarityScore);
@@ -85,7 +89,7 @@ public class Main {
             writer.newLine();
         }
         writer.close();
-
+*/
 //        /**********************************************************************************/
 
     }

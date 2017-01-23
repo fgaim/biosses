@@ -34,7 +34,7 @@ public class UmlsSimilarity implements SimilarityMeasure {
 
     public static void main(String[] args) throws Exception {
 
-        calculateUmlsPairScore("hand", "skull");
+        System.out.println(calculateUmlsPairScore("hand", "skull"));
 
     }
 
@@ -45,7 +45,7 @@ public class UmlsSimilarity implements SimilarityMeasure {
          String[] command = {"query-umls-similarity-webinterface.pl", "--measure","cdist","--sab" ,"OMIM,MSH",
                  "--rel" ,"PAR/CHD", word1, word2};
          ProcessBuilder builder = new ProcessBuilder( command );
-         File commandDir = new File("/home/gizem/WorkingProjectFolder/UMLS-Similarity/webInterface/"  +"UMLS-Similarity-1.45/utils");
+         File commandDir = new File("C:\\Users\\T082123\\Desktop\\sses\\src\\main\\resources\\UMLS-Similarity-1.47\\utils\\");
          builder.directory(commandDir);
          builder.redirectErrorStream(true);
          Process p = builder.start();
