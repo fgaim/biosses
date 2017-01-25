@@ -45,7 +45,7 @@ public class UmlsSimilarity implements SimilarityMeasure {
          String[] command = {"query-umls-similarity-webinterface.pl", "--measure","cdist","--sab" ,"OMIM,MSH",
                  "--rel" ,"PAR/CHD", word1, word2};
          ProcessBuilder builder = new ProcessBuilder( command );
-         File commandDir = new File("C:\\Users\\T082123\\Desktop\\sses\\src\\main\\resources\\UMLS-Similarity-1.47\\utils\\");
+         File commandDir = new File(Resources.getResource("UMLS-Similarity-1.47\\utils\\").getFile());
          builder.directory(commandDir);
          builder.redirectErrorStream(true);
          Process p = builder.start();
