@@ -297,7 +297,7 @@ public class CombinedOntologyMethod implements SimilarityMeasure{
         if (word1.getWord().equalsIgnoreCase(word2.getWord()) || word1.getWord().contains(word2.getWord()) ||
                 word2.getWord().contains(word1.getWord())) {
             if(wordnet_similarity_score == 0 && word1.isInUmls() && word2.isInUmls())
-                result = 2;
+                result = 1;
             else
                 result = 1;
         }
@@ -328,14 +328,47 @@ public class CombinedOntologyMethod implements SimilarityMeasure{
             if(wordnet_similarity_score > 0 && umls_similarity_score <= 0)
                 result = wordnet_similarity_score;
             else if(umls_similarity_score >0 && wordnet_similarity_score <= 0)
-                result = umls_similarity_score*2;
-            else result = (umls_similarity_score*2 + wordnet_similarity_score)/3;
+                result = umls_similarity_score;
+            else result = (umls_similarity_score + wordnet_similarity_score)/2;
 
         }
 
 
 
         return result;
+    }
+
+
+    public Vector<Double> constructVectorWordnet(Sentence sentence, HashSet<Word> dictionary){
+        Vector<Double> vector = new Vector<Double>();
+        int vectorIndex = 0;
+        for(Word word: dictionary) {
+            List<Double> scoresList = new ArrayList<Double>();
+            if (sentence.getStringWords().contains(word.getWord())) {
+                vector.add(vectorIndex, 1.0);
+                vectorIndex++;
+
+            } else {
+                for (Word s : sentence.getWords()) {
+                    if(!word.isStopWord()) {
+                        double simScore = 0;
+                        try {
+                            simScore = calculateOnlyWordnetScores(s, word);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        scoresList.add(simScore);
+                        if (simScore == 1.0)
+                            break;
+                    }
+                }
+                Collections.sort(scoresList);
+                vector.add(vectorIndex, scoresList.get(scoresList.size() - 1));
+                vectorIndex++;
+            }
+        }
+        return  vector;
+
     }
 
     public Vector<Double> constructVectorForSentence(Sentence sentence, HashSet<Word> dictionary) throws SLIB_Exception, IOException {
@@ -354,7 +387,7 @@ public class CombinedOntologyMethod implements SimilarityMeasure{
             } else {
                 for (Word s : sentence.getWords()) {
                     if(!word.isStopWord()) {
-                        double simScore = calculateUMLSScoreUsingWordnetInformation(s, word);
+                        double simScore = calculateCombinedSimilarityScore(s, word);
                         scoresList.add(simScore);
                         if (simScore == 1.0)
                             break;
@@ -430,6 +463,24 @@ public class CombinedOntologyMethod implements SimilarityMeasure{
         return filteredSentence;
     }
 
+
+    public double getSimilarityForWordnet(String sentence1, String sentence2) throws SLIB_Exception, IOException {
+
+        Sentence mappedSentence1 = returnSentence(sentence1, stopWordsList);
+        Sentence mappedSentence2 = returnSentence(sentence2, stopWordsList);
+        //  returnSentence dan sonra da noktalama kaldırılmıs ve stop word bilgisi eklenmis oldu
+        HashSet<Word> dictionary  = constructDictionary(mappedSentence1, mappedSentence2);
+
+        Vector<Double> vector1 = constructVectorWordnet(mappedSentence1, dictionary);
+        Vector<Double> vector2 = constructVectorWordnet(mappedSentence2, dictionary);
+
+        CosineSimilarity similarityMeasure = new CosineSimilarity(vector1, vector2);
+        double similarityScore = similarityMeasure.calculateDistanceAmongVectors();
+        return similarityScore;
+
+
+    }
+
     public double getSimilarity(String sentence1, String sentence2) throws SLIB_Exception, IOException {
 
 //        Sentence mappedSentence1 = getMetamapResult(removeAllNonAsciiLetters(sentence1), stopWordsList);
@@ -459,5 +510,54 @@ public class CombinedOntologyMethod implements SimilarityMeasure{
 
     public void setPair_score(HashMap<String, Double> pair_score) {
         this.pair_score = pair_score;
+    }
+
+    public double getSimilarityForUMLS(String s1, String s2) {
+        Sentence mappedSentence1 = returnSentence(s1, stopWordsList);
+        Sentence mappedSentence2 = returnSentence(s2, stopWordsList);
+        //  returnSentence dan sonra da noktalama kaldırılmıs ve stop word bilgisi eklenmis oldu
+        HashSet<Word> dictionary  = constructDictionary(mappedSentence1, mappedSentence2);
+
+        Vector<Double> vector1 = constructVectorForUMLS(mappedSentence1, dictionary);
+        Vector<Double> vector2 = constructVectorForUMLS(mappedSentence2, dictionary);
+
+        CosineSimilarity similarityMeasure = new CosineSimilarity(vector1, vector2);
+        double similarityScore = similarityMeasure.calculateDistanceAmongVectors();
+        return similarityScore;
+    }
+
+    private Vector<Double> constructVectorForUMLS(Sentence mappedSentence1, HashSet<Word> dictionary) {
+
+        Vector<Double> vector = new Vector<Double>();
+        int vectorIndex = 0;
+        for(Word word: dictionary) {
+            List<Double> scoresList = new ArrayList<Double>();
+            if (mappedSentence1.getStringWords().contains(word.getWord())) {
+                vector.add(vectorIndex, 1.0);
+                vectorIndex++;
+
+            } else {
+                for (Word s : mappedSentence1.getWords()) {
+                    if(!word.isStopWord()) {
+                        double simScore = 0;
+                        try {
+                            simScore = calculateUMLSScoreUsingWordnetInformation(s, word);
+                        } catch (SLIB_Exception e) {
+
+
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        scoresList.add(simScore);
+                        if (simScore == 1.0)
+                            break;
+                    }
+                }
+                Collections.sort(scoresList);
+                vector.add(vectorIndex, scoresList.get(scoresList.size() - 1));
+                vectorIndex++;
+            }
+        }
+        return  vector;
     }
 }

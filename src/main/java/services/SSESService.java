@@ -46,21 +46,24 @@ public class SSESService {
 
             case 1:
                 //WORDNET
-                WordNetSimilarity measureOfWordnet = new WordNetSimilarity();
-                similarityScore = measureOfWordnet.getSimilarity(s1, s2);
-                System.out.println(similarityScore);
-//                CombinedOntologyMethod measure1 = new CombinedOntologyMethod(stopWordsList);
-//                similarityScore =measure1.getSimilarity(s1, s2);
-//                System.out.println(similarityScore);
+                CombinedOntologyMethod measureOfWordNet = new CombinedOntologyMethod(stopWordsList);
+                similarityScore = measureOfWordNet.getSimilarityForWordnet(s1, s2);
+                System.out.println("SCORE: " + similarityScore);
                 break;
 
             case 2:
-                UmlsSimilarity measureOfUMLS = new UmlsSimilarity();
-                similarityScore = measureOfUMLS.getSimilarity(s1,s2);
-                System.out.println(similarityScore);
+                CombinedOntologyMethod measureOfUmls = new CombinedOntologyMethod(stopWordsList);
+                similarityScore = measureOfUmls.getSimilarityForUMLS(s1, s2);
+                System.out.println("SCORE:" + similarityScore);
                 //UMLS
                 break;
             case 3:
+                CombinedOntologyMethod score_wordnet = new CombinedOntologyMethod(stopWordsList);
+                double score_1 =score_wordnet.getSimilarityForWordnet(s1, s2);
+
+                double score2 = score_wordnet.getSimilarityForUMLS(s1,s2);
+                similarityScore = (score2+score_1)/2;
+                System.out.println("SCORE: " + similarityScore);
                 //COMBINED
                 break;
 

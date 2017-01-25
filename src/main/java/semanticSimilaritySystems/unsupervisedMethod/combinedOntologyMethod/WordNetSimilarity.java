@@ -24,13 +24,13 @@ public class WordNetSimilarity implements SimilarityMeasure {
 
         WordNetSimilarity w = new WordNetSimilarity();
      //   Double score = w.getSimilarity("love", "like");
-        Double score = w.calc("love", "like");
+        Double score = w.calculateWordNetPairScore("i love you", "like");
         System.out.println(score);
     }
 
     public double calc(String word1, String word2){
         WS4JConfiguration.getInstance().setMFS(true);
-        double s = new WuPalmer(db).calcRelatednessOfWords(word1, word2);
+        double s = new Path(db).calcRelatednessOfWords(word1, word2);
         return s;
     }
 

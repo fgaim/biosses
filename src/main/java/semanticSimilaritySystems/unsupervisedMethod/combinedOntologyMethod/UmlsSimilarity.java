@@ -9,13 +9,19 @@ import java.io.*;
 import semanticSimilaritySystems.core.SimilarityMeasure;
 
 import slib.utils.ex.SLIB_Exception;
+import sun.security.util.Resources;
 
 
 public class UmlsSimilarity implements SimilarityMeasure {
 
     public double getSimilarity(String word1, String word2) throws SLIB_Exception, IOException {
 
-        return calculateUmlsPairScore(word1, word2);
+        try {
+            return calculateUmlsPairScore(word1, word2);
+        } catch (InterruptedException e) {
+
+            return 0;
+        }
     }
 
     public static void main(String[] args) throws Exception {
@@ -25,34 +31,42 @@ public class UmlsSimilarity implements SimilarityMeasure {
     }
 
 
-     public static double calculateUmlsPairScore(String word1, String word2) throws SLIB_Exception, IOException {
+     public static double calculateUmlsPairScore(String word1, String word2) throws SLIB_Exception, IOException, InterruptedException {
 
-         double similarityScore = 0;
-         String[] command = {"query-umls-similarity-webinterface.pl", "--measure","cdist","--sab" ,"OMIM,MSH",
-                 "--rel" ,"PAR/CHD", word1, word2};
-         ProcessBuilder builder = new ProcessBuilder( command );
-         File commandDir = new File(com.google.common.io.Resources.getResource("UMLS-Similarity-1.47/utils/").getFile());
-         builder.directory(commandDir);
-         builder.redirectErrorStream(true);
-         Process p = builder.start();
+         Process process = Runtime.getRuntime().exec("C:\\Strawberry\\perl\\bin\\perl.exe " + com.google.common.io.Resources.getResource("UMLS-Similarity-1.47/utils/").getFile().substring(1) +"query-umls-similarity-webinterface.pl --measure cdist --sab OMIM,MSH --rel PAR/CHD "
+         + word1 + " " + word2);
+          process.waitFor();
 
-         BufferedReader r = new BufferedReader(new InputStreamReader(p.getInputStream()));
+         if(process.exitValue() == 0)
+         {
+             System.out.println("Command Successful");
+         }
+         else
+         {
+             System.out.println("Command Failure");
+         }
+
+         double similarity=0;
+
+         BufferedReader r = new BufferedReader(new InputStreamReader(process.getInputStream()));
          String line;
          while (true) {
              line = r.readLine();
              if (line == null) { break; }
-            // System.out.println(line);
+             System.out.println(line);
              if(line.contains(word1) && line.contains(word2)){
                  String[] split = line.split("<>");
-                // System.out.println(split[0]);
                  try {
-                     similarityScore=Double.parseDouble(split[0]);
+                     similarity=Double.parseDouble(split[0]);
+                     System.out.println(similarity);
 
                  } catch (NumberFormatException e) {
                  }
              }
 
          }
-         return similarityScore;
+
+         System.out.println("SON:" + similarity);
+         return similarity;
     }
 }
