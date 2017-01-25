@@ -18,11 +18,26 @@ import java.util.List;
  */
 public class WordNetSimilarity implements SimilarityMeasure {
 
+    private static ILexicalDatabase db = new NictWordNet();
+
+    public static void main(String[] args){
+
+        WordNetSimilarity w = new WordNetSimilarity();
+     //   Double score = w.getSimilarity("love", "like");
+        Double score = w.calc("love", "like");
+        System.out.println(score);
+    }
+
+    public double calc(String word1, String word2){
+        WS4JConfiguration.getInstance().setMFS(true);
+        double s = new WuPalmer(db).calcRelatednessOfWords(word1, word2);
+        return s;
+    }
 
     public double calculateWordNetPairScore(String word1, String word2){
 
         // word1 = "love"; word2 = "like";
-    //    System.setProperty("wordnet.database.dir", "C:/Users/T082123/Desktop/sses/src/main/resources/dict/");
+    ///   System.setProperty("wordnet.database.dir", "C:/Users/T082123/Desktop/sses/src/main/resources/dict/");
         //C:\Users\T082123\Desktop\sses\src\main\resources\dict
   //      WordNetDatabase database = WordNetDatabase.getFileInstance();
     //    Synset[] synsets = database.getSynsets(word1);

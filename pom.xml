@@ -21,7 +21,7 @@
             <groupId>gov.nih.nlm.nls</groupId>
             <artifactId>skr-web</artifactId>
             <scope>system</scope>
-            <systemPath>${basedir}/src/main/webapp/WEB-INF/libs/SKR_Web_API_V2_1.jar</systemPath>
+            <systemPath>${basedir}/src/main/webapp/WEB-INF/lib/SKR_Web_API_V2_1.jar</systemPath>
             <version>1.0</version>
         </dependency>
 
@@ -30,7 +30,7 @@
             <groupId>edu.smu.tspell</groupId>
             <artifactId>jaws-bin</artifactId>
             <scope>system</scope>
-            <systemPath>${basedir}/src/main/webapp/WEB-INF/libs/jaws-bin-1.2.jar</systemPath>
+            <systemPath>${basedir}/src/main/webapp/WEB-INF/lib/jaws-bin-1.2.jar</systemPath>
             <version>1.0</version>
         </dependency>
 
@@ -60,10 +60,18 @@
             <version>2.0.1</version>
         </dependency>
 
-        <dependency>
+       <!-- <dependency>
             <groupId>de.sciss</groupId>
             <artifactId>ws4j</artifactId>
             <version>0.1.0</version>
+        </dependency>-->
+
+        <dependency>
+            <groupId>de.sciss</groupId>
+            <artifactId>ws4j</artifactId>
+            <scope>system</scope>
+            <systemPath>${basedir}/src/main/webapp/WEB-INF/lib/ws4j-1.0.1.jar</systemPath>
+            <version>1.0.1</version>
         </dependency>
 
         <dependency>
