@@ -211,20 +211,18 @@ public class CombinedOntologyMethod implements SimilarityMeasure{
 
     public double calculateOnlyUmlsScores(Word word1, Word word2) throws SLIB_Exception, IOException {
 
-        double umls_similarity_score=0;
-        WordNetSimilarity w  =new WordNetSimilarity();
-        double wordnetscore =w.getSimilarity(word1.getWord(), word2.getWord());
+        double umls_similarity_score = 0;
+       /* WordNetSimilarity w  = new WordNetSimilarity();
+        double wordnetscore = w.getSimilarity(word1.getWord(), word2.getWord());
 
         if (wordnetscore <= 0 && word1.isInUmls() && word2.isInUmls() && (word1.getWord().equalsIgnoreCase(word2.getWord())
         || word1.getWord().contains(word2.getWord()) || word2.getWord().contains(word1.getWord()))) {
            //
             System.out.println(word1.getWord() +" - " + word2.getWord() +" : " + wordnetscore);
             umls_similarity_score = 1;
-        }
-
-
-         else if(wordnetscore == 0) {
-            if (word1.isInUmls() && word2.isInUmls()) {
+        }*/
+        // else if(wordnetscore == 0) {
+          //  if (word1.isInUmls() && word2.isInUmls()) {
 
                 if(!getPair_score().containsKey(word1.getWord() + "-" + word2.getWord()) &&
                         !getPair_score().containsKey(word2.getWord() +"-" + word1.getWord())) {
@@ -245,8 +243,8 @@ public class CombinedOntologyMethod implements SimilarityMeasure{
                     else umls_similarity_score = getPair_score().get(word2.getWord()+"-"+word1.getWord());
                 }
 
-            }
-        }
+          //  }
+       // }
         return umls_similarity_score;
     }
 
@@ -541,7 +539,7 @@ public class CombinedOntologyMethod implements SimilarityMeasure{
                     if(!word.isStopWord()) {
                         double simScore = 0;
                         try {
-                            simScore = calculateUMLSScoreUsingWordnetInformation(s, word);
+                            simScore = calculateOnlyUmlsScores(s, word);
                         } catch (SLIB_Exception e) {
 
 

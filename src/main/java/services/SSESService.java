@@ -83,7 +83,12 @@ public class SSESService {
                 break;
 
             case 6:
-                //SUPERVISED!!!
+                //SUPERVISED SONUCU GUNCELLENECEK!!
+                metric = StringMetrics.qGramsDistance();
+                similarityScore = metric.compare(preprocessedS1, preprocessedS2); //0.4767
+
+                System.out.println(similarityScore);
+
                 break;
 
         }

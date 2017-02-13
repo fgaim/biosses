@@ -33,7 +33,8 @@ public class UmlsSimilarity implements SimilarityMeasure {
 
      public static double calculateUmlsPairScore(String word1, String word2) throws SLIB_Exception, IOException, InterruptedException {
 
-         Process process = Runtime.getRuntime().exec("C:\\Strawberry\\perl\\bin\\perl.exe " + com.google.common.io.Resources.getResource("UMLS-Similarity-1.47/utils/").getFile().substring(1) +"query-umls-similarity-webinterface.pl --measure cdist --sab OMIM,MSH --rel PAR/CHD "
+         double similarity=0;
+         Process process = Runtime.getRuntime().exec("/usr/bin/perl " + com.google.common.io.Resources.getResource("UMLS-Similarity-1.47/utils/").getFile().substring(1) +"query-umls-similarity-webinterface.pl --measure cdist --sab OMIM,MSH --rel PAR/CHD "
          + word1 + " " + word2);
           process.waitFor();
 
@@ -45,8 +46,6 @@ public class UmlsSimilarity implements SimilarityMeasure {
          {
              System.out.println("Command Failure");
          }
-
-         double similarity=0;
 
          BufferedReader r = new BufferedReader(new InputStreamReader(process.getInputStream()));
          String line;
