@@ -4,6 +4,7 @@ import com.google.common.io.Resources;
 import org.apache.log4j.Logger;
 import semanticSimilaritySystems.core.FileOperations;
 import semanticSimilaritySystems.core.SimilarityMeasure;
+import services.SSESService;
 import similarityMeasures.CosineSimilarity;
 import slib.utils.ex.SLIB_Exception;
 
@@ -11,6 +12,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Random;
 import java.util.Vector;
 
 /**
@@ -39,7 +41,7 @@ public class WordVectorConstructor implements SimilarityMeasure{
         String line;
 
         while((line = bufferedReader.readLine())!=null){
-            System.out.println(line);
+          //  System.out.println(line);
             String[] split = line.split("\\s+");
             String word = split[0];
 
@@ -51,7 +53,7 @@ public class WordVectorConstructor implements SimilarityMeasure{
             if(vector.size() == 200){
                 word = FileOperations.replacePunctuations(word);
                 wordvector.put(word, vector);
-                System.out.println(word);
+            //    System.out.println(word);
             }
 
         }
@@ -82,6 +84,29 @@ public class WordVectorConstructor implements SimilarityMeasure{
             }
 
         }
+    }
+
+    public double getSimilarityRandomly(String sentence1, String sentence2){
+        double similarityScoreOfWordVec;
+
+        if(sentence1.equalsIgnoreCase(sentence2)){
+            similarityScoreOfWordVec = 1;
+        }
+
+        else {
+            if (SSESService.paragraphVecHash.containsKey(sentence1.toLowerCase() + "_" + sentence2.toLowerCase()))
+                similarityScoreOfWordVec = SSESService.paragraphVecHash.get(sentence1.toLowerCase() + "_" + sentence2.toLowerCase());
+            else if (SSESService.paragraphVecHash.containsKey(sentence2.toLowerCase() + "_" + sentence1.toLowerCase()))
+                similarityScoreOfWordVec = SSESService.paragraphVecHash.get(sentence2.toLowerCase() + "_" + sentence1.toLowerCase());
+            else {
+                Random rand = new Random();
+                int val = rand.nextInt(50) + 40;
+                similarityScoreOfWordVec = (double) val / 100.0;
+                SSESService.paragraphVecHash.put(sentence1.toLowerCase() + "_" + sentence2.toLowerCase(), similarityScoreOfWordVec);
+            }
+
+        }
+        return similarityScoreOfWordVec;
     }
 
 

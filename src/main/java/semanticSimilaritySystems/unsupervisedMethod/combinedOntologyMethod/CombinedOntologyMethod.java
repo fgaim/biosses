@@ -228,7 +228,10 @@ public class CombinedOntologyMethod implements SimilarityMeasure{
                         !getPair_score().containsKey(word2.getWord() +"-" + word1.getWord())) {
 
                     UmlsSimilarity umls_similarity_measure = new UmlsSimilarity();
-                    umls_similarity_score = umls_similarity_measure.getSimilarity(word1.getWord(), word2.getWord());
+                    if(word1.getWord().equalsIgnoreCase(word2.getWord()))
+                        umls_similarity_score = 1;
+                    else
+                        umls_similarity_score = umls_similarity_measure.getSimilarity(word1.getWord(), word2.getWord());
 
                     getPair_score().put(word1.getWord() + "-" + word2.getWord(), umls_similarity_score);
 
