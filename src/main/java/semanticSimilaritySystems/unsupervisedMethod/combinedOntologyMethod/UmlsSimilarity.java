@@ -47,7 +47,7 @@ public class UmlsSimilarity implements SimilarityMeasure {
         process.waitFor();
 
         if (process.exitValue() == 0) {
-            System.out.println("Command Successful");
+            //System.out.println("Command Successful");
         } else {
             System.out.println("Perl Failure");
         }
@@ -59,19 +59,19 @@ public class UmlsSimilarity implements SimilarityMeasure {
             if (line == null) {
                 break;
             }
-            System.out.println(line);
+            //System.out.println(line);
             if (line.contains(word1) && line.contains(word2)) {
                 String[] split = line.split("<>");
                 try {
                     similarity = Double.parseDouble(split[0]);
-                    System.out.println(similarity);
+                    //System.out.println(similarity);
                 } catch (NumberFormatException e) {
                 }
             }
 
         }
 
-        System.out.println("SON:" + similarity);
+        //System.out.println("SON:" + similarity);
         return similarity;
     }
 }
